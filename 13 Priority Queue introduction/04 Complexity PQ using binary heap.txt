@@ -1,0 +1,35 @@
+1) B Heap construction		O(n)	why linear? 
+  how to construct bheap?		
+	there is a method to construct bheap from unordered array //heapsort
+	//this algo uses O(n)
+
+
+2) Polling				O(log(n))	//remove root	
+	//How to remove element from heap?
+	restoring heap invariant
+	//in heap we cant delete any element directly
+
+Q) Why searching has log n?
+How many digits needed to uniquely identify a no.?
+	no. of digits needed to idnetify a X bw 0 - N-1
+	is log10(N) digits	//identify X in decimal
+	is log2(N) bits		  identify X in binary
+Similarly array of size n (0 <-> n-1) -> Need log(n) operations minimum 
+
+Q) Why sorting has nlog(n)
+	mapping normal array to sorted array
+	1st takes atleast log(n) time
+	2nd takes           log(n-1)
+		          ....
+		          log(1)
+	->log(n!) -> approx nlog(n)
+
+3) Peeking : O(1) 
+
+4) Adding : O (log(n))	//have to reshuffle heap
+
+5) Naive Removing	: O(n)	//remove not root element
+			//linear scan
+
+6) Contains check using hash table O(1)
+			//adds constant overhead, because we are accessing table a lot

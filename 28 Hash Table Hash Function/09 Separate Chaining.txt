@@ -1,0 +1,347 @@
+A)  separate chaining
+Scenario: 2 keys : hashing same value index
+Given Normal table:	//we using arbit hash function
+	          Key
+     	          Name    Age	Hash
+	          Will         21	3	
+	          Leah       18	4	 
+	          Rick        61	2
+	          Rai         25	1
+	          Lara       34	4
+	          Ryan      56	1
+	          Finn       21	3
+	          Mark      10	4
+
+Q) How to insert via separate chaining?
+Objective: Insert in hash table via separate chaining
+insert(Will)
+insert(Leah)
+insert(Rick)
+insert(Rai)
+insert(Lara) 
+	* problem: hash collision occurs , 4 occupied by Leah
+		Add Lara to the chain of Leah
+insert(Ryan)
+	* problem: hash collision occurs , 1 occupied by Rai
+		Add Ryan to the chain of Rai
+insert(Finn)	
+	//note both even have same age
+	how to tell them apart?
+		storing both key and value as entry in linked list block			
+insert(Mark)
+Hash Table : Made up of linked list
+0
+1	Name: Rai   Age: 25  -->  Name: Ryan  Age: 56
+2	Name: Rick   Age: 61
+3 	Name: Will   Age: 21 -->  Name: Finn  Age: 21	
+4	Name: Leah  Age: 18  --> Name: Lara  Age: 34 --> Name: Mark  Age: 10 
+5
+
+ 
+
+Q) How to look up via separate chaining?
+	a) Given : name : Ryan
+		Find what person age is
+
+	b) Hash(Ryan) => index = 1
+	c) traverse linked list until key matches
+		matches for "Ryan" -> find age
+	   if doesnt exist -> return null
+	
+Q) What if we get really long linked lists chains?
+	how to keep insertion and look up TC low in that case:
+		a) once many elements
+		b) create new hash table with more capacity
+		c) move elements from old hash table into new (different location spread)
+Separate Chaining Source Code
+Algo:
+1)  Create entry class
+   a) What member variables? Create using generics
+	hash variable of type int
+	key of type K value of type V
+
+   b) Create constructor
+	Initializes : key,value and calculates hashcode for that key
+	how will we calculate hashcode for an object? java built in method //we override and use it for our object
+	how will we avoid reacalculating hash code?	//cache the hash code 
+  
+    c) equals() method
+	What does it do? Checks if hash is not equal
+	What input?Entry <K,V> generic
+	Check if hash  equal
+	if equal return other.key
+	)
+   d) toString() 
+	returns key => value format
+}
+		
+2) Create separate chaining class: HashhTableseparateChaining
+	member variables?
+	a) Default capacity of 3 
+		//What capacity of hash table
+	b) dfeualt load factor 0.75
+		//What is load factor? max capacity we can tolerate
+	    private	double maxLoadFactor;
+		//What if load factor exceeds? resize the table
+	    private int capacity,threshold,size=0
+		//What is capacity? max no. of elements
+		//What is threshold ? = capacity * maxLoadFactor
+		//What is size? how many items currently
+
+	c) Create table
+		How to create hash table? Array of linked list : Linked list contains type Entry 
+		private LinkedList <Entry<K,V> [] table;
+
+	d) Hash table Default constructor
+		initializes	 DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR	
+
+	e) Hash table param constructor : takes in capacity
+		initializes with this capacity passed and  DEFAULT_LOAD_FACTOR
+
+	f) Hash table param constructor : takes in int capacity and double  maxLoadFactor
+		if capacity < 0passed : throw illegal capacity passed
+		if maxLoadFactor< 0 passed : throw Illegal maxLoadFactor
+		calculate threshold
+		initialize table by creating new Linked list object
+
+	g) size() //How many elements in hash table
+	h) isEmpty()	//check if hash table empty -. return true
+	i)normalizeIndex : take hash value : keyHash and process into idex	//remove -ve sign, place in domain	//why needed? hash values are integers have to be converted to [ o capacity]
+
+	j) clear()	//how to clear the table
+	k) containsKey
+	l) hasKey()  //checks if given key exists in hash table
+	   int bucketIndex = normalizeIndex(Key.hashCode());	//normalise /map the hash
+	   return bucketSeekEntry(bucketIndex, key) !=null;	//checks which bucket hash key is in
+
+	l) insert(K key, V value)
+		1) if insert null : dont allow : throw exception 
+		2) if valid key -> create new key value entry
+		3) find which bucket new entry belongs to
+		4) insert it using bucketInsertEntry(bucketIndex newEntry); 
+
+	m) get(K key) method	
+		What input? key
+		How to find value associated with that key?
+		1) if key is null return null
+		2) find which bucket key belongs to? using bucketIndex(key.hashCode())	
+		3) if not null -> returnentry.value;
+	n) remove(K key)	
+		1) What input? key
+		2) bucketRemoveEntry(bucketIndex, Key)
+
+	o) bucketRemoveEntry()
+		1) What input? bucketIndex and key
+		2) Seek the key-value entry inside Linkedlist  structure using bucketSeekEntry
+		3) if entry != null -> remove from extracted linked list
+				a) Extract linked list
+				how? LinkedList <Entry<K,V>> links = table[bucketIndex];
+
+				b) remove
+				how?	links.remove(entry)
+				c) reduce size
+				d) return entry.value
+				e) if entry = null -> return null
+
+
+	p) bucketInsertEntry(int bucketIndex, Entry <K,V> entry) {	//How to place entry in a bucket once bucket is known
+	    		a) get/extract the linked list structure
+				LinkedList <Entry<K,V>> bucket = table[bucketIndex];
+			b) if bucket is null -> create new linked list
+			c) find an entry that already exists
+				Entry <K,V> bucket = table[bucketIndex];
+			    	if this entry is null
+}					Add new entry to end of linked list	//how? bucket.add(entry)				
+					After adding increment size and check if size > threshold
+					if yes resize table
+					return null
+				else
+					 update existing entry 
+					return value
+					
+	q) resizeTable()
+		1)double the capacity
+		2) calculate the new threshold
+		3) create new table with doubled capacity 	\
+		4) go through doubled table -> look for linked list data structures that are not null
+		5) loop through all null values
+		6) calculate bucket index	
+		7) Find bucket and insert into new table
+		8) remove old data and avoid memory leak
+		9) set old table as new table
+
+
+	r) keys()
+		list of keys in hash table		
+
+	s) values()
+		ist of values in hash table
+
+	t) Iterator
+		
+
+	u) toString methods
+Code:
+===========================================
+class Entry  <K,V> {
+  int hash;
+  K key; V value;
+
+public Entry(K Key, V value) {
+  this.key = key;
+  this.value=  value;
+  this.hash = key.hashCode();
+}  
+public boolean equals(Entry <K,V> other) {
+  if(hash != other.hash) return false;
+ return key.equals (other.key)
+}
+@Override public String toString() {
+  returnkey + " => " + value;
+}
+}
+
+@SuppressedWarnings("unchecked")
+public class HashTableSeparateChaining <K,V>implements Iterable <K> {}	
+
+private static final double DEFAULT_LOAD_FACTOR = 0.75;
+
+private doublemaxLoadFactor;
+privateint capacity, threshold, size = 0;
+
+c) private LinkedList <Entry<K,V> [] table;
+
+d) public HashTableSeparateChaining () {
+   this(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR);
+}
+
+e)public HashTableSeparateChaining(int capacity){
+   this(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR)
+}
+
+f) public HashTableSeparateChaining (int capacity, doublemaxLoadFactor) {
+  	if(capacity < 0)
+	  throw new IllegalArgumentException("Illegal Capacity");
+	if(maxLoadfactor <=0 || Double.isNaN(maxLoadFactor) || Double.isInfinite(maxLoadFactor))
+	  throw new illegalArgumentException ("Ilegal maxLoadFactor");
+	thismaxLoadFactor = maxLoadFactor;
+	this.capacity=  Math.max(DEFAULT_CAPACITY, capacity);//taking max, dont want capacity being too low
+	threshold = (int) (this.capacity * maxLoadFactor);
+	table = new LinkedList [this.capacity];
+}
+
+g) public int size() {return size;}
+
+h) ublic boolean isEmpty() {return size ==0;}
+
+i) private int normalizeIndex(int keyHash) {
+	return (keyHash & 0x7FFFFFFF) % capacity;
+} 
+
+public void clear() {
+  Arrays.fill(table,null);
+  size = 0;
+}
+
+public boolean containsKey (K key) {return hasKey(key) ; } 
+
+public boolean hasKey(K Key) {
+   int bucketIndex = normalizeIndex(Key.hashCode());
+   return bucketSeekEntry(bucketIndex, key) !=null;
+}
+
+public V insert(K key, V value) {
+	if(key == null) throw new IllegalArgumentException()
+	Entry <K,V> newEntry  = new Entry<>(key,value);
+	int bucketIndex = normalizeIndex(newEntry.hash);
+	return bucketInsertEntry(bucketIndex, newEntry);
+}
+
+public V get(K key) {
+	if(key == null) throw new IllegalArgumentException()
+	Entry <K,V> entry  = bucketSeekEntry(bucketIndex, key);
+	if(entry!=null) return entry.value;
+	return null;
+}
+
+public V remove(K key{
+	if(key == null) return null;
+	int bucketIndex = normalizeIndex(key.HashCode());
+	return bucketRemoveEntry(bucketIndex, key);
+})
+
+private V bucketRemoveEntry(int bucketIndex, K key) {
+	Entry <K,V> entry = bucketSeekEntry(bucketIndex, key);
+	if(entry != null) {
+	  LinkedList <Entry<K,V>> links = tabl[bucketIndex];
+	links.remove(entry);
+	--size;
+	return entry.value;
+}	else return null;
+} 
+
+private V bucketInsertEntry(int bucketIndex, Entry <K,V> entry) {
+	LinkedList <Entry<K,V> bucket = table[bucketIndex];
+	if(bucket == null) table[bucketIndex] = bucket  = new LinkedList <> ();
+
+	Entry<K,V> existendEntry = bucketSeekEntry(bucketIndex, entry.key);
+	if(existentEntry == null) {
+	  bucket.add(entry);
+	  if(++size > threshold) resizeTable();
+	  return null;
+	} else {
+		V oldval = existentEntry.value;
+		existentEntry.value = entry.value;
+		return oldVal;
+}
+}	    	
+private Entry <K,,V> bucketSeekEntry(int bucketIndex, K key) {
+	if(key ==  null) return null;
+	LinkedList <Entry<k,V> bucket = table[bucketIndex];
+	if(bucket == null) return null;	
+	for(Entry <K,V> entry: bucket)
+	  if(entry.key.equals(key))
+		return entry;
+	 return null;	
+}
+
+
+private void resizeTable() {
+ 
+  capacity*= 2;
+  threshold= (int) (capacity *maxLoad(Factor);)
+  LinkedList <Entry<K,V> [] newTable = new LinkedList[capacity];
+	
+ for(int i=0 ; i< table.lengthl i++) {
+	if(table[i] != null) {
+	   for(Entry <K,V> entry : table [i]) {
+	      int bucketIndex = normalizeIndex(entry.hash);	
+	      LinkedList<Entry<K,V>> bucket= newTable[bucketIndex];
+	      if()bucket == null) newTable[bucketIndex] = bucket = new LinkedList<>();
+	      bucket.add(entry);
+}
+	table[i].clear();
+	 table[i] = null;
+}
+}
+	table = newTable;
+}
+}
+
+public List <K> keys() {
+	List <K> keys = new ArrayList<>(size());
+	for(LinkedList<Entry<K,V>>bucket : table)
+	if(bucket !=null)
+	  for (Entry <K,V> entry : bucket)
+		keys.add(entry.key);
+	return key;
+}
+
+publicList <V> values() {
+	List <V> values = new ArrayList<>(size());
+	  for(LinkedList<Entry<K,V>> bucket : table)
+	    if(bucket!=null)
+		for(Entry<K,V> entry : bucket)
+			values.add(entry.value);
+	return values;
+}

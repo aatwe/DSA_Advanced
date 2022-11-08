@@ -1,0 +1,46 @@
+What is BFS?
+operation on graph for graph traversal
+	what is graph? a network of values
+
+What is done in BFS?
+	a) start at a node
+	b) traverse entire graph / all nodes 
+		How to traverse?
+		a)  visit all neighbours of starting node
+		b) all neighbours of first neighbour visited
+
+	//overall explore one layer by layer
+
+
+lets use 3 types of nodes
+a) unvisited nodes
+b) on frontier / layer nodes
+c) visited nodes
+
+++++++++++++++++++++++++++++++++++++
+BFS Algo
+// how will we connect nodes? we use queue
+1) Create a queue
+//how do we travel from one node to another? add nodes in queue
+//how to travel to first node? add first node in queue
+2) Add first node to queue(travel to first node)
+//how to mark this node is travelled? mark as visited
+	2a) Mark first node as visited
+Now find neighbours and make frontier layer for this node.// How to find neighbours for this node in queue?
+
+
+3) Make it a frontier node(dequeue node from queue)
+		a) Find all neighbours for queue
+		b) travel to first neighbour(add to queue)
+			b.1)  mark as visited
+		c) travel to second neighbour(add to queue), 
+			c.1)  mark as visited
+ 		...... do till all neighbour visited
+		d) travel to last neighbour (add to queue), 
+			d.1) mark as visited
+		//frontier for node 1 explored
+	//keep making frontier nodes (dequeing) till stack is empty //no more neighbours left 
+++++++++++++++++++++++++++++++++++++
+BFS Code
+
+

@@ -1,0 +1,76 @@
+Lever order is a little different
+		11
+	        /	         \
+	     6	          15
+	/       \	      /       \
+             3          8	  13            17
+           /    \	/     \            \
+        1	  5         12     14           19
+
+
+What objective? Print nodes one level/layer at a time
+ie
+11 , 6 , 15 , 3 , 8 . 13 , 17 , 1 , 5 , 12 , 14 , 19
+
+How to do level order?
+What to use? Queue
+Do Iteratively or recursively? Iteratively
+We do using Breadth First Search from root node
+	Just keep pulling the most recent node in queue	
+
+What and how to do breadth first search?	
+Note Concept: Add from bottom of queue , remove from top , also add first left then right
+BFS(){
+a) Add root to queue
+b) remove top element of queue, replace with left and right subtree
+	if top element has no children, remove directly
+
+c) print removed element
+
+d) once only leaf elements in queue left? remove in order top to bottom into order list
+e) Get final level order traversal
+
+}
+
+		11
+	        /	         \
+	     6	          15
+	/       \	      /       \
+             3          8	  13            17
+           /    \	/     \            \
+        1	  5         12     14           19
+
+
+
+1) Create a queue //why creating queue? to track nodes left to explore
+        Start : Queue with only root node
+
+	Queue: 	11
+	Order: 
+
+2) remove first queue value, insert left and right child in queue
+	Queue: 	6 , 15
+	Order:  	11
+
+3)  	Queue:   15 , 3 , 8	//15 moves to top, 6 is removed, replaced with 3 then 8 (in this order)
+	Order:    11 , 6
+
+4) 	Queue:   3 , 8 , 13, 17
+	Order:    11 , 6 , 15
+
+5) 	Queue:   8 ,13 , 17 ,1 , 5	//
+	Order:    11 , 6 , 15 , 3
+
+6) 	Queue:   13, 17 , 1 , 5
+	Order:    11 , 6 , 15 , 3 , 8
+
+
+7) 	Queue:   17 , 1 , 5 , 12 , 14
+	Order:    11 , 6 , 15 , 3 , 8 , 13
+
+8) 	Queue:    1 , 5 , 12 , 14 , 19		//Cant remove any, all leaf nodes
+	Order:    11 , 6 , 15 , 3 , 8 , 13 , 17 , 1 , 5 , 12 , 14 , 19
+
+ 
+Final Level Order Traversal
+	Order:    11 , 6 , 15 , 3 , 8 , 13 , 17 , 1 , 5 , 12 , 14 , 19

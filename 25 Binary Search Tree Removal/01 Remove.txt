@@ -1,0 +1,134 @@
+How to remove elements from binary search tree?
+
+//Find Phase
+1) Find which element to remove
+//Replace Phase
+2) remove node, replace node with apt next node to sastisfy invariant
+	What invariant? 
+		left subtree < right subtree
+
+
+A) Find Phase
+Note: We use comparator fo find values
+	What is comparator function?
+	returns -1 if find value less than current root node -> implies value is on left //go left
+	              0  if find value  equal current root node  ->implies value found
+	              1 i if find value greater than current root node  ->implies value found
+
+cases:
+1) if we find null node(reached leaf node) -> the value does not exist
+2)  comparator value is 0 : means we found the value (since equal)
+3) comparator value is -1 : if the value exists , it'll be in left subtree
+4) comparator value is +1 : if the value exists , it'll be in right subtree
+
+
+
+For ex
+Given:
+		20
+	        /	         \
+	   10	        31
+	/       \	      /       \
+             5         15	  25         42
+           /	       /     \               /     \
+        2	    12      19         35       47
+	   /   \	         /      \
+	11    14	      33      37
+
+find(14)
+find(25)
+find(37)
+find(17)
+
+Execute:
+
+1) find(14)
+	a) start at root 20	
+	b) Run comparator -> since 14 < 20 -> go left
+	       ...keep doing
+	c) 14 found
++++++++++++++++++++++++++++++++++++++++++++++
+B) REPLACE/REMOVE PHASE
+
+cases: 
+1) Leaf node to be removed
+	a) find node
+	b) directly remove node
+
+*2) it is a node with left/ right subtree
+	if we remove the node
+	a) find node
+	b) find which subtree exists
+		if left subtree , after removing 9 -> replace with root node of left subtree
+		if right subtree , after removing 9 -> replace with root node of right subtree
+
+4) node to be removed has left subtree and right subtree
+		Can replace with(2 successors)		
+			1) largest value in left subtree	//keep invariant satisfied : right> left
+				(Go to left subtree -> but then dig right)
+			or
+			2) smallest value in right subtree	//keep invariant satisfied: : right > left
+				(Go to right subtree -> but then dig left)
+
+For ex
+
+		5
+	        /	         \
+	   4	          9*
+	/       	      /      
+             3         	  7        
+	               /      \
+	            6          8 
+
+After removing           
+		5
+	        /	         \
+	   4	         7
+	/       	       /      \     
+             3         	    6          8    
+	               
+	            
+CASE 4 ex Remove(7)
+	               7
+	        /	         \
+	   5	        20
+	/       	      /       \
+             4         	  18         25
+           /	   	/     \           \
+        2	             11      19        33
+      /       \	 /
+    1	3	 14         28
+	              /      \           \
+	          12	      15         31
+
+How to remove 7	//Solve using  smallest value in right subtree
+a) Find 7,
+	7 has both left and right subtree
+						**we choose to use smallest value in right
+b)  //Find smallest value in right subtree below removal node
+     go into right subtree
+	dig left
+	keep digging left until no left child found
+	//11 becomes the successor
+c) Copy smallest from right subtree and replace 7 / removal node
+d) Remove (11)
+	How to remove(11)
+	 d.1) Check if it has right/left subtree	//our case 11 has right , but no left subtree case2
+		remove 11
+		replace with root of right subtree :  14 becomes successor
+		rebalance the tree
+
+         	               11
+	        /	         \
+	   5	        20
+	/       	      /       \
+             4         	  18         25
+           /	   	/     \           \
+        2	             14        19        33
+      /     \	            /    \	    /
+    1       3	         12    15             28
+	              	                    \
+	          	                   31
+		
+
+Can also do using largest value in left subtree

@@ -1,0 +1,6 @@
+Enqueue		O(1)  , why constant time?
+Dequeue		O(1)  
+Peeking		O(1)
+Contains		O(n)
+Removal		O(n)
+Is Empty		O(1)

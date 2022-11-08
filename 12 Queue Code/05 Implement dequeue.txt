@@ -1,0 +1,3 @@
+Push head forwards
+removed node , set it to null	//garbage collector picks up
+in end head and tail both point to null

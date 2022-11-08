@@ -1,0 +1,13 @@
+Singly Linked list vs Doubly Linked List
+
+a) SLL : only 1 pointer to next node
+	Pro?	Use less memory (1 pointer < 2 pointers)
+		(pointers take lot memory, @64 bit references use 8 bytes)
+
+	Con?	cannot access previous element
+b) DLL : 2 pointers : 1 to next node, 1 to previous node
+	Pro? can traverse back
+	         can remove node in O(1) and patch up hole
+	
+	Con? uses twice memory
+ 

@@ -1,0 +1,189 @@
+SUMMARY: Dynamic Array using Java
+
+
+Dynamic array: size grows as per needed
+
+
+Q1) How to add and remove elements from dynamic array?
+A = 34, 4		//A.add(-7)
+A = 34,4,-7	//A.add(34)
+A = 34,4,-7,34
+A = 34,-7,34	//A.remove(4)
+
+
+Ex of dynamic array
+Given dynamic array with size 2
+a)  Initial:   #     #
+b)  Add 7   7     #  
+c)  Add -9  7    -9
+d) //Double size of array
+e) Add 3     7   -9  3   #
+f) Add 12    7  -9   3   12
++++++++++++++++++++++++++++++++++++++++++
+What dynamic array code?
+0) Avoid annoying generics in java
+
+1) Design array class
+	supports generics of type t
+
+2) 3 private variables
+	arr
+	len	//
+	capacity	// theoretical capacity
+
+3) 2 constructors
+	Array : initializes array to 16
+	Array : takes input capacity ->
+		//check for capacity is >=0
+		  ->  initailzie capacity variable of array
+		     -> Initialize Array and Type cast array to type T
+
+4) 2 methods
+	size()	-> returns ize of array
+	isEmpty() -> Checks if array is empty
+
+5) getter
+	//input:  index	//should do bounce check but AnYwAyS
+	
+6) setter  //input: index, element 
+
+7) clear method //remove all data from array, reset length to 0
+
+
+8) add method: input elem
+	when to resize array? if len + 1 >= capacity
+	How to resize? double the size of static array	//convient
+	    How to double size? create  new array with new capacity
+			       Copy all elements from old array to new array
+				set old array to new array
+
+9) removeAt method: removes a particular value at given index	//What input?
+
+	How to remove value at a given index?
+		Check if index is valid ?, if not throw exception
+		grab and store data from remove index	
+		initialize new array , what will be size of new array? 1 less than len
+		copy all elements except removed element into new array	 	//can find easier way	//use neat trick
+		
+	  for(int i = 0, j = 0; i< len; i++, j++)
+	  if(i == rm_index) j--;	//if you find index, stop j just before				//if  i = 5, j = 5 -> j = 4, i = 5
+	  else new_arr[j]  = arr[i];	//if you dont find it keep storing element in new array		// i =6 and j =5 -> new_arr[5] = arr[6]	//basically new_arr[5] = arr[5] was skipped
+		copy old arr name to new arr
+		change capacity to new arr len-1
+		return the removed value		
+
+10) remove(Object obj) method		//removes known object
+	a) scan array
+	b) if found object (how to find? .equals(obj) method)->removeAt(i); and return true;
+		else  return false;
+
+11) indexOf(Object obj)			//returns index of parameter object
+	if finds -=> return i
+	else return -1;
+
+12) Contains method
+	input: Object obj
+	output returns: indexOf(obj) != -1;	
+
+
+13) Return iterator for array
+	What is iterator? Allows to iterate over array  (an abstraction)
+	2 methods:
+		hasNext()	: ? returns index  if index < len
+		next()	: ? returns the next element in array, based on where iterator\
+
+
+14) toString() method
+	output? string representation of this array	
+		how? String Builder and tostring method	
+		Note: StringBuilder needs toString() to convert  mutable sequence of characters to String
++++++++++++++++++++++++++++++++++++++++++=
+@SuppressWarnings("unchecked')
+  public class Array<T> implements Iterable {
+
+private T [] arr;
+private int len = 0;
+private int capacity = 0;
+
+public Array() { this(16); }	
+public Array(int capacity) {
+	if(capacity < 0) throw new IllegalArgumentException("Illegal Capacity" + capacity)	
+	this.capacity = capacity;
+	arr = (T[]) new Object[capacity];	//array initialized
+}
+
+public int size() {return len; }
+public boolean isEmpty() {return size() ==0;}	//recall == vs =
+
+public T get(int index) {return arr[index]; }
+public void set(int index, T elem) {
+	arr[index] = elem;
+}
+
+public void clear() {
+	for(int i = 0; i< capacity; i++)
+	   arr[i] = null;
+	len = 0;
+}
+
+public void add(T elem){
+	if(len +1 >= capacity) {
+	   if(capacity ==0) capacity = 1	//corner case when capacity was 0
+	   else capacity *= 2;
+	 T[] new_arr = (T[]) new Object[capacity];
+	for(int i=0 ; i< len; i++)
+	  new_arr[i] = arr[i];
+	new_arr[i] = arr[i];
+	arr = new_arr;
+	}	
+arr[len++] = elem;				//insert elem	     
+}}}
+
+public T removeAt(int rm_index) {
+  if(rm_index >= len && rm_index < 0) throw new IndexOutOfBoundException();	//corner case
+      	T data = arrrm_index];	//grab and store value
+	T[] new_arr = (T[]) new Object[len -1];
+	for(int i = 0, j = 0; i< len; i++, j++)
+	  if(i == rm_index) j--;	//if you find index, stop j just before				//if  i = 5, j = 5 -> j = 4, i = 5
+	  else new_arr[j]  = arr[i];	//if you dont find it keep storing element in new array		// i =6 and j =5 -> new_arr[5] = arr[6]	//basically new_arr[5] = arr[5] was skipped
+	arr =new_arr;
+	capacity = --len;
+	return data;		
+}
+
+public boolean remove(Object obj)	{
+	for(int i =0; i< len; i++)
+	   if(arr[i].equals(obj))
+		removeAt(i); return true;}}
+	return false;
+}
+
+public int indexOf(Object obj){
+	for(int i=0; i< len; i++){
+	 if(arr[i].equals(obj))
+	return i;
+            return -1;
+}
+public boolean contains(Object obj){
+	return indexOf(obj) != -1;
+}
+
+@Override public java.util.Iterator <T> iterator () {
+	return  new java.utilIterator <T> () {
+	       int index  = 0;
+	       public boolean hasNext() { return  index < len ;}
+	      public T next() { return arr[index ++];}
+};
+}}
+
+@Override public StringtoString() {
+	if(len == 0) return "[]";
+	else {
+	   StringBuilder sb = new StringBuilder (len).append("[");
+	for(int i = 0; i< len - 1; i++)
+	  {
+		sb.append(arr[i] + ",");
+	  return sb.append(arr[len - 1] + "]").toString();
+}
+}
+}

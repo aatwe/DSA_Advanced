@@ -1,0 +1,103 @@
+Given
+A) Instructions:
+Poll()
+Remove(12)
+Remove(3)
+Poll()
+Remove(6)
+
+B) Binary Heap:
+		1
+	     /	           \
+	  5  	            1
+	/     \	        /	\
+             8         6	      2         2
+          /    \       /   \        /   \    /   \
+        13    12  11   7      2   15  3  10
+
+
+How to remove nodes from binary heap?
+A) Poll() //remove element at root
+    a.1) swap root and right end node
+	 (root at position 0 : Highest priority node)  with node at end of array : 10		
+	               10
+	     /	           \
+	  5  	            1
+	/     \	        /	\
+             8         6	      2         2
+          /    \       /   \        /   \    /   \
+        13    12  11   7      2   15  3   1
+
+  a.2) check if heap invariant is satisfied
+	
+	if variant not satisfy:
+	Keep Bubbling down
+	a.2.1) If unequal children 
+	Select pair with smallest no. to swap
+		//2 Pair dont satisfy variant: 10 - 5 and 10 -1
+		//select smallest : i.e 10  - 1 
+
+
+      	a.2.2) If equal children 	
+		Select left node by default
+
+		1
+	     /	           \
+	  5  	            2
+	/     \	        /	\
+             8         6	      2         2
+          /    \       /   \        /   \    /   
+        13    12  11   7    10  15  3 
+
+
+B) Remove(12)
+
+	b.1) Search 12 in tree  //even if dont know position yet 
+	b.2) start at root -> do linear scan
+	b.3) swap remove node(i) with right most node (last in array)
+			Remove the swapped right most nodes
+		1
+	     /	           \
+	  5  	            2
+	/     \	        /	\
+             8         6	      2         2
+          /    \       /   \        /   \    /   
+        13    12  11   7    10  15  3 
+
+
+		1
+	     /	           \
+	  5  	            2
+	/     \	        /	\
+             8         6	      2         2
+          /    \       /   \        /   \     /   
+        13    3  11   7    10     15 
+				
+				//12   //removed 			
+
+	b.4) Check if variant satisfied
+		if not : bubble up/down until variant satisfied
+			if unequal : children : select smaller
+			if equal children : select left
+			swap  8 - 3
+			          5 - 3
+			          
+		1	
+	     /	           \
+	  3  	            2
+	/     \	        /	\
+             5         6	      2         2
+          /    \       /   \        /   \     
+        13    8  11   7    10     15
+
+C) Remove(3)
+............
+
+++++++++++++++++++++++++++++++++++++++++++++++
+What time complexity observed?
+
+Polling: O (log(n))		//removing root , know where
+Removing : O(n)		//removing naive, have to find where
+
+	//any hack to reduce removing complexity?Yes , layer
+

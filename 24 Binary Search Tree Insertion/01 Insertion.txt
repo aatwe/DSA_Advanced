@@ -1,0 +1,63 @@
+How to add elements to binary search tree?
+
+a) which elements can we add to BST? Ordered/comparable elements
+	so we know where we can place it
+
+b) Where can we insert?
+	1) if element < current node : recurse to left subtree
+	2) if element > current node : recurse to right subtree	
+	3) if element = current node : decide whether want to add duplicate or ignore
+	4) if hit null node, create a new node  //for starting root node case
+
+
+For ex
+Instructions:
+insert(7)
+insert(20)
+insert(5)
+insert(15)
+insert(10)
+insert(4)
+insert(4)	* we choose and decide not to add
+insert(33)
+insert(2)
+insert(25)
+insert(6)
+
+
+
+
+		7
+	           /	      \
+	        5	       20
+	   /         \      /         \
+	4            6   15         33
+            /		   /             /
+         2		 10	25
+
+Q) What insertion time? avg O(log(n))?
+
+Q) Worst case ex?
+insert(1)
+insert(2)
+insert(3)
+insert(4)
+insert(5)
+insert(6)
+
+Why is the below bad? finding node for insertion/deletion will take O(n)
+Solution? balanced binary search tree
+	Self balancing trees	//What do they do? self balance when we insert nodes
+1
+  \ 
+    2
+       \ 
+         3 
+           \ 
+             4
+               \
+	 5
+                    \
+                     6
+
+

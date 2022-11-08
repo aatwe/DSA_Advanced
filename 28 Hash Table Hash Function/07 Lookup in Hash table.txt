@@ -1,0 +1,19 @@
+How to look up in hash table
+Given:
+Hash table: 		//array
+	         Key	        Value
+	0
+	1
+	2         3 	      "byte-eater"	
+	3        10         "orange-knight"
+	4         1	      "will-fiset"
+	5
+	6
+	7        32 	      "Lauren425"
+	8         5         "ternarywizard"
+	9
+
+Objective: look up a user with rank/key r
+
+	1) Hash the rank	H(r)
+	2) Find index in hash table

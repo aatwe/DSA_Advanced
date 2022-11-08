@@ -1,0 +1,70 @@
+Compre regular union find vs path compression union find
+
+Instructions
+Union(A,B)
+Union(C,D)
+Union(E,F)
+Union(G,H)
+Union(I,J)
+Union(J,G)
+Union(H,F)
+Union(A,C)
+Union(D,E)
+Union(G,B)
+Union(I,J) 
+
+Normal Compression
+//A B C D E F G H I J
+//A->B	 C->D 	E<-F 	G->H 	I<-J
+Blue	Orange	Red	Green	Grey
+root nodes: B, D, E,H,I
+
+
+Final State: //root node E	
+A ->B -> C->D->E<-F  	//all red
+	               \
+   	        G  -> H <- I <- J
+
+Using normal Union Find()?
+Q) if we want to find what group , nodes A and J are in?	
+	Have to traverse
+		A:A->B->C->D->E
+		J : J ->I->H->E
+
+
+Using Path compression?
+
+Path Compression
+//A B C D E F G H I J
+//A->B	 C->D 	E<-F 	G->H 	I<-J
+//A ->B -> C->D->E<-F  	
+	               \
+   	        G  -> H <- I <- J
+//A ->B  C->D     E<-F    
+  	             \
+	    G  -> H <- I 	
+	             ^
+	              |
+	              J	
+
+
+//due to path compression, j merges with H directly(root)
+	        
+   	     
+
+//Path keeps compressing dynamically
+In earlier example: we didnt finish all instruction, and reached final end
+In path compression ex: As long as something is compressed on path : We can compress path along the way
+				Pointing it to root
+	Summary: Almost everything points to E in O(1)
+
+	B     H
+	   \  /
+C-   >   D -> E < - F
+             |	   /  | \
+           A	   G   J   I	
+
+
+Summary: Path compression makes structure very stable
+	And Union find with path compression: becomes efficient
+     

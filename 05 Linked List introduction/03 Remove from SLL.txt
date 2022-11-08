@@ -1,0 +1,20 @@
+Objective : remove node with value 9 from SLL
+How many pointers?4
+	a) Head
+	b) Tail
+	c) trav1 : Head node
+	d) trav2 : Head +1
+
+1) Head points -> first node value 
+2) Tail points   -> last node value
+3) where do trav1 and trav2 point?
+	head node and head + 1
+
+4) Move trav 1 & trav 2
+	if trav2 = value9
+	create temp and point here	//mark the remove node
+
+5) Move trav2 to temp node + 1
+6)  set trav1 -> next = trav2 
+7) remove temp -> next 	//temp is deallocated
+8) Clean memory -> avoid memory leaks

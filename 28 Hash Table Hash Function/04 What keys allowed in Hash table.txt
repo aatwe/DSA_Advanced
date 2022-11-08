@@ -1,0 +1,10 @@
+Hashable key of type T
+
+immutable keys are enforced by programming lang
+	What are immutable key? cant be changed
+		Why? to enforce deterministic hash function 
+
+for ex
+	immutable key: immutable string , integers allowed
+		          Sets, lists , other things we can add/remove : not allowed
+	

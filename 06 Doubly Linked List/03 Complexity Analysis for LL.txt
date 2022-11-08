@@ -1,0 +1,8 @@
+		SLL		DLL
+Searching	O(n)		O(n)	why linear? have to traverse all elements worst case
+Insert at head	O(1)		O(1)	why constat? head we keep track using head pointer
+Insert at tail	O(1)		O(1)	why constant?we track tail
+Remove at head	O(1)		O(1)	why constant? we track head
+Remove at tail	O(n)		O(1)	why sll linear?have to seek till end to find new tail,  dll not? dont have to seek coz have backward pointer (can remove node continiously from tail)
+Remove in middle  O(n)		O(n)	//worst case n-1 elements ~ n
+

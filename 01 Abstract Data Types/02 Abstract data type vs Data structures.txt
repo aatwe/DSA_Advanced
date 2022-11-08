@@ -1,0 +1,19 @@
+ADT : 
+	What is ADT? abstraction of data structure
+	provides only interface adhering to data structure (How DS should behave, what methods to have)
+						(Doesnt give the details)
+	What interface does not tell?
+	how to implement
+	what programming lang to implement in
+
+
+	ADT is only the vehicle, you have to choose and drive
+
+
+What ADTs we know?    List, Queue, Map , Vehicle
+What implementations?  
+  //Different implementations have different efficiency and uses
+	List	 : using dynamic array, using linked list
+	Queue  	 : using link list, using array, using stack
+	Map 	 : Using Tree Map, Using HashMap / HashTable
+	Vehicle 	 : Using Golf cart, Using Bicycle, using smart car	

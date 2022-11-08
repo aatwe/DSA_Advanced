@@ -1,0 +1,15 @@
+Where used? Generally in graph theory algorithms
+1) Dijkstra's Shortest path algo
+	//what does it do? fetch next nodes to explore
+
+2) Dynamically fetch next best / next worst element
+
+
+3) Huffman Coding (Uses in lossless data compression) 
+
+4)Best First Search (BFS) algo
+	finds what? next most promising node
+
+5) Prim's Minimum Spanning tree algo
+	on directed graphs 
+	

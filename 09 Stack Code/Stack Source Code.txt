@@ -1,0 +1,76 @@
+Algo
+1) Create stack class that will use iterable
+	
+a) we use linkedList provided by java 
+	//instance variable of linked list (in java.util package)
+
+
+b) Create empty stack
+
+c) add first element to stack
+	how to add? use push(T elem)
+
+d) size() returns how many elements in stack
+
+e) Check if stack is empty
+
+f) push element on stack     //return type is void
+	how? list.addLast(elem);
+
+
+g) pop an element on stack
+	//pop return type is T
+	How to pop?
+		when cant we pop? when stack is empty
+	a) so check if stack is empty
+	   if stack is not empty
+		remove the last element
+		  how to remove? list.removeLast();
+
+
+
+h) peek
+	check what top element of stack is
+	when can we not see what top element is? stack is empty
+	a)  check if stack is empty
+	b) if stack not empty -> return list.peekLast()
+
+
+i) returns itertator for our linked list
+	//supports concurrent modification errors
+	//helps user iterate through stack
++++++++++++++++++++++++++++++
+Code:
+public class Stack <T> implements Iterable <T> {
+  private java.util.LinkedList <T> list = new java.util.LinkedList <T> ();
+
+public Stack() {}
+
+public Stack(T firstElem) {
+  push(firstElem)l
+}
+
+public boolean isEmpty() {
+  return size() == 0;
+}
+
+public void push(T elem){	
+  list.addLast(elem)
+}
+
+public T pop() {
+  if(isEmpty())	
+    throw new java.util.EmptyStackException();
+ return list.removeLast();
+    
+}
+public T peek() {
+	if(isEmpty())
+	throw new java.util.EmptyStackException();
+	return list.peekLast();
+}
+}
+
+@Override public java.util.Iterator <T> iterator (){
+  return list.iterator();
+}

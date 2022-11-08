@@ -1,0 +1,17 @@
+How many pointers?
+a) Head
+b) Tail
+c) trav
+
+
+
+Algo? Objective: remove 9 from DLL
+1) where head point to? starting node
+2) where tail point to? end node
+3) where trav point to? starting node
+4) seek trav until value node (to remove) 9 found 
+5) point the forward pointer of node before trav node -> point to backward pointer of node after trav node
+6) point backward pointer of node after trav node -> point to forward pointer of node before trav node		//node before trav and after trav are linked
+7) remove trav node to avoid meory leak
+
+9 is removed from DLL

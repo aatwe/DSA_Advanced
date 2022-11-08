@@ -1,0 +1,137 @@
+*/why index input? Due to bijection we can look up and find what maps to element id p 
+	Easier to have array based unionFind instead of pointer based union find
+Algo
+1) Create class UnionFind {
+}
+
+2) Create 4 member variables
+	int size;	//How many elements in Union find	
+	int[] sz;	//How to track size of each component? array
+	int[] id;    //How to track parent nodes for each?array to parent root nodes  //Coz Bijection is done
+	int numComponents;	//How to track how many components in union find?
+	UnionFind(int size	)
+
+3) Create a unionFind()	//What input? size of union find
+	Param constructor
+	a) Initialize instance variables
+	b) Loop through array
+	    Intialize id to store i 	why? every node is its own root node
+	    Initialize component size : 1	
+
+4) Find() method
+	What does it do?Input: node -- finds root node of p(which component node belongs to)
+					+ while doing path compression
+	What input? p node
+	a) How to find root node?
+		initiailze root as p
+		while  root != id[root]	//until we dont find self looop
+		root = id[root];
+	b) How to do path compression?	
+		1) start at p
+		2) assign everything from p to -> equal root //amortized
+			//how to do the above?
+				while loop(iterative) or recursive(overhead)	
+		while(p != root){
+	c) return root
+}
+
+5) connected()
+	What input? p and q object index
+	returns true if p and q are in same component
+	How to check if in same component?
+		root of p = root of q
+	//while checking also this will compress
+
+6) componentSize(int p){
+	What input? index p
+	size of component relative to index p
+	How to find component size?
+	  find(p) gives root id
+	  sz[root_id]	//
+	  
+
+7) size()
+	returns what? how many components in our Union Find or Disjoint set
+
+8) components()
+		//How many remaining components
+	
+9) public void unify(int p, int q) 
+	What does it do?	Unifies components
+	What input? p and q node index		//why index input? Due to bijection we can look up and find what maps to element id p 
+	a) Find root node for p
+	b) find root node for q
+	c) When are components in same group? when root nodes are equal
+	d) Merge smaller group into larger group
+		d.1) Identify smaller group
+			if(sz[root1] < sz[root2]) {
+		     //if root1 < root2  , merge root 1 into root2
+		     Merge group, how?
+		              sz[root2] +=  sz[root1];	
+		    //Update id of root 1 as root 2 now		
+		              id[root1] = root2;
+		    //else do other way
+	e) after succesfully merging 2 components, reduce numComponents by 1 
+}
+++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+1)  public class UnionFind {
+	private int size;	
+	private int[] sz;
+	private int[] id;
+	private int numComponents;
+}
+public UnionFind(int size) {
+	if(size<=0)
+	  throw new IllegalArgumentException("Size <=0 is not allowed");
+
+	this.size = numComponents = size;
+	sz = new int[size];
+	id= new int[size];
+
+	for (int i = 0; i< size; i++) {
+	   id[i] = i;
+	   sz[i] = 1;
+	}
+}
+
+2) public int find(int p){
+	int root = p;
+	while (root  != id[root])	
+	   root = id[root];
+
+	whlie(p != root) {
+	  int next = id[p];
+	  id[p] = root;
+	  p = next;
+}
+return root;
+}
+3) public boolean connected(int p, int q) {
+  return find(p) == find(q);
+}
+
+4) public int componentSize(int p){
+ return sz[find(p)];
+}
+
+5) public int size() {
+ return size;
+}
+
+6) public void unify(int p, int q) {
+	int root1 = find(p);
+	int root2 = find(q);
+
+	if(root1 == root2) return;
+
+	if(sz[root1] < sz[root2]) {
+	  sz[root2] += sz[root1];
+	  id[root1] = root2;
+}	else {
+	  sz[root1] += sz[root2];
+	  id[root2] = root1;
+}
+
+numComponents--;
+}

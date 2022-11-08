@@ -1,0 +1,52 @@
+Given:	Hypothetical union find
+
+Objective: Take union of E and L
+	Union(E,L)
+
+
+Given: 2 pointers on E and L
+	How to union?
+	a) Find root node of E, Find root node of L
+	b) point one to another	
+
+What happens when including path compression?
+	How to union?
+	a) Find root node of E (F)	//Using pointers
+	 ,  Find root node of L (G)
+		//We have reference to root nodes
+A) Compress path1
+	For root node of E i.e F and Compress the path
+	b) Point E -> to root node of E   :F
+	    Point D -> to root node of D  :F
+	    Point C -> to root node of C  :F
+	    Point B -> to root node of B  :F
+	    Point A -> to root node of A  :F
+
+	Why are we pointing all nodes along path to root node?
+		Everytime we do look up on A,B,C,D,E
+		
+	We can find out what parent / root node is in constant time for a component
+	
+	Avoided traversing sequence of other nodes  
+	  
+B) Compress path2	 
+	For root node of L i.e G and compress the path 
+	b) Point L -> to root node of L       : G
+	    Point  K -> to root node of K     : G
+	    Point  J ->  to root node of J      : G
+	    Point  I ->  to root node of I       : G
+	    Point H -> to root node of H      : G 	
+
+	Why are we pointing all nodes along path to root node?
+		Everytime we do look up on L,K,J,I,H we can find root node in O(1)
+		since we are directly pointing to it
+		
+	We can find out what parent / root node is in constant time for a component
+	
+	And, we, Avoided traversing sequence of other nodes  
+
+C) Point F root node to G root node
+	And unify the group
+
+Output: 1 Common group of Orange like before
+	But in this case it is compressed and hence efficient

@@ -1,0 +1,36 @@
+SLL
+
+  Head			  Tail
+       5 ---->   23 -----> 7 -----> 13
+  Trav
+
+What 3 pointers?
+1) Head
+2) Trav
+3) Tail
+
+Algo
+1) Create 3 pointers
+2) Create a new node (to be inserted)
+3) point  new node to where to insert (i)
+   	point i-1 node to the new node	//how will we track previous node? trav node will keep reference
+
+DLL
+  Head			  Tail
+       5 <---->   23 <---> 7 <---> 13
+
+What 3 pointers?
+1) Head
+2) Trav
+3) Tail
+
+
+Algo
+1) create 3 pointers
+2) create new node (to be added)
+3) new node forward pointer points to ith node
+3) new node backward pointer poitns to i-1 node	//how to track i-1 node?trav pointer will keep reference	
+4) ith node backwards pointer points to new node
+5) i-1 node forward pointer points to new node
+
+new Node gets inserted 

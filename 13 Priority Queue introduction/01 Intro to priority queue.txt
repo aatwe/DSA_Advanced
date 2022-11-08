@@ -1,0 +1,45 @@
+Q)  What is Priority Queue?
+Stack and Queue were data structures
+
+Priority queue is Abstract data type(meaning? can be implemented with other DS)
+provides only interface adhering to data structure (How DS should behave, what methods to have)
+						(Doesnt give the details)
+	
+
+Q) How different from normal queue?
+Queue but every element has certain priority
+in normal queue: we dequed the head element first
+in priority queue: we deque higher priority element first
+	what if same order? follow and dequeue in whatever order already
+
+
+Q) What is the priority followed?
+	smaller number -> higher priority
+for ex		1         >	     2
+
+Higher priority are removed first from queue(frontier)
+
+SUMMARY
+poll() in priority queue means : remove element with highest priority first from priority queue
+++++++++++++++++++++++++++++++++++++++++++++++++
+Ex
+What priority below? higher ascii value , higher priority
+	
+insert (C)			C
+insert (O)			C O
+insert (D)			C O D
+remove max		C D		//O removed
+insert (I)			C D I
+insert(N)			C D I N
+remove max		C D I		//N removed
+insert (G)			C D I G
+
+Output priority queue:
+
+Q) How is priority queue finding priority of elements and determining which element to remove?
+we can see visually!
+
+Machine uses HEAP to find priority elements
+'
+
+Q) What is heap?

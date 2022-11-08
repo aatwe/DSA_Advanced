@@ -1,0 +1,64 @@
+preorder: prints before the recursive call
+
+note:  in our logic when leaf node reached -> i.e null node to left and right -> return called
+	What happens when return is called?
+	Current function is pushed of call stack
+
+note: when function called : push to call stack
+
+preorder(node):
+
+if node == null: return
+print(node.value)
+preorder(node.left)
+preorder(node.right)
+
+Given: Generic Binary tree
+		
+		A
+	        /	         \
+	     B	          C
+	/       \	      /       \
+             D          E	  F            G
+           /    \	/     \            \
+        H	  I           J         K            L
+
+How preorder works?
+
+A) maintain Call stack  //why? to track what is called during recursion
+				if we know what called -> we know what node to go to
+     maintain output order  /whenever we Print(A) : A will be shown
+	Order: A  B  D  H  I 	E C F J K G L
+B) Start traversal (using preorder rule)
+	1) 	preorder(A)	-> callstack : A
+		Print(A)
+		go to A-> left
+	2) 	preorder(B)   	-> callstack : A B
+		print(B)
+		go to B -> left
+	3) 	preorder(D)	-> callstack : A B D
+		print(D)
+		preorder(D.left) : 9sssssssss	sss	w	wlgo to D -> left
+	4) 	preorder(H)	-> callstack : A B D H
+		print(H)
+		go to H -> left  //null
+		preorder(H.left) = preorder(null)
+			if node == null ; return	//H gets removed from call stack
+	 			-> callstack : A B D 
+	5) 	//return to code after D.left
+		preorder(D.right) = preorder(I)  callstack : A B D H I
+		print(I)				
+		preorder(I.left) = preOrder(null)
+		if node == null ; return	//H gets removed from call stack
+	 			-> callstack : A B D H 
+			//D.left and D.right done
+		//return to B.right //B.left done
+		
+	6) 	preorder(B.right) = preorder(E)
+		print(E)	
+		preorder(null) //return
+		//return to A.right
+		...		
+
+Final Pre Order traversal : A  B  D  H  I  E C F J K G L
+	

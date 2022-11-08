@@ -1,0 +1,82 @@
+Tree based Data structure satisfying a property called heap property / heap variant
+//Note heap be tree, cannot be structure //should not contain cycles
+	
+2 cases:
+For alll nodes:
+Rule a) value of parent node > value of child node	//MAX HEAP
+						(binary heap)
+					why? every node : 2 child
+	Ex
+	8				
+           /	       \
+      7	          6
+   /     \	           |
+3        2	          5
+
+Rule b) value of parent node < value of child node	//MIN HEAP
+	0					(binary heap)
+           /	       \				why? every node : 2 child
+      2	          3	
+   /     \	       /	\
+4        5	      6 	 4   
+
+
+Q) why we studying heaps?
+	heaps help find priority elements in pqueue
+	heap is canonical underlying data structure for priority queue
+
+	*sometime priority queue = heap
+
+
+Q) Heap examples
+a) Is it heap? no	
+	does not satisfies heap invariant
+	0					
+           /	       \				
+      2	          6	*	
+   /     \	       /	\
+4        5	      3	 4   
+	
+b) Is it heap? yes min heap
+		satisfies heap invariant
+	
+		0 
+       /	/	|
+     1       1               1
+   / |        |
+2   2       2	 	
+
+
+c) Is below a valid heap? No, why? contain cycles
+
+	8
+           /	      \
+       6	       6
+    /       \     /       \
+2	4            2	 
+
+
+
+d) Is it heap? Yes	
+	7
+
+
+e) 	5
+	|
+	5
+	|
+	5
+
+
+f) Is it heap?No
+	does not satisfy heap variant
+ 	5
+	|
+	10
+	|
+	5
+
+If we modify to , Yes it is heap
+	10
+              /	      \
+          5	       5

@@ -1,0 +1,14 @@
+Q) What is double hashing?
+
+P(k,x) = x*H2(k)
+		//H2(k) : is second hashing function
+
+
+input type of H2(k) = H1(k)
+	string = string
+	integer = integer
+
+Double hashing is like linear probing 
+	just that constant is unknown until runtime
+
+so similar issues like linear probing : infinite cycle

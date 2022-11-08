@@ -1,0 +1,180 @@
+Q1) What is a linked list?
+
+nodes of data pointing to other nodes of data
+
+
+What does every node have?
+	data
+	pointer to next node
+	last node points to null	//has no reference for next node
+
+
+ 
+Q2) Where are linked list is used?
+	a) ADT implementations: List, Stacks, Queue
+		why? great time complexity for add and remove elements
+	b) Circular linked list : useful in repeating elements
+	c) Real world objects
+	d) Hash table separate chainings
+	e) adjacency list and graphs
+
+
+Q3) Terms
+	
+	a) Head? 1st node of LL
+		//always maintain/keep reference to head of LL
+	b) Tail?    last node of LL
+		//give name to last element of LL
+	c)  Nodes: contain pointers / reference----> pointing to next node
+		How to represent node? structs or classes
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1) Objective create linked list class
+a) Linked list class contains?
+	a.1) Head variable of type Node
+               a.2)  Node class //Node contains?	 
+		a.2.1) data variable of type int
+		a.2.2) next pointer of type Node	
+		a.2.3) Node (int d )	//param constructor for node //input? data element of node
+			a.2.3.1initialize data = d
+			a.2.4) Initialize next = null	
+
+
+class LinkedList {
+   Node head;
+	class Node {
+		int data;
+		Node next;
+
+		Node(int d)
+		{
+		   data  = d;
+		   next  =  null;
+		}
+	}
+}			
+}
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Objective: Create linked list with 3 nodes
+Pseudo Code:
+
+1) Objective create linked list class
+a) Linked list class contains?
+	a.1) Head variable of type Node
+               a.2)  Node class //Node contains?	 
+		a.2.1) data variable of type int
+		a.2.2) next pointer of type Node	
+		a.2.3) Node (int d )	//param node constructor//input? data element of node  //function? creates a node with value d pointing to null
+			a.2.3.1initialize data = d
+			a.2.4) Initialize next = null	
+b) Create main method  //what input?String[] args
+	b.1) Create empty linkedlist list 
+	b.2) input value 1 into list head. 
+		create node1  new	// new  Node(1)
+		insert node1 in linked list as head  //list.head = new Node(1)
+	b.3) Create 2 more nodes 
+		Node second and Node third
+	b.4) Add 2 nodes to linkedlist l1
+		b.4.1) point head node's next pointer to the second node
+			list.head.next = second;				//Second node added to LL l1
+			second.next =third;					//3rd node added to LL l1
+class LinkedList {
+	
+	Node head;
+	static class Node {
+		int data;
+		Node next;
+		Node(int d) 
+		{
+			data = d;
+			next = null;
+}
+}
+}
+
+public static void main(String[] args)
+{
+	Linkedlist list = new LinkedList();	//note we didnt define , java auto adds constructor
+	list.head = new Node(1);
+	Node second = new Node(2);
+	Node third = new Node(3);
+	list.head.next = second;
+	second.next = third;
+	
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Objective: Traverse a linked list with 3 nodes
+Pseudo Code:
+
+1) Objective create linked list class
+a) Linked list class contains?
+	a.1) Head variable of type Node
+               a.2)  Node class //Node contains?	 
+		a.2.1) data variable of type int
+		a.2.2) next pointer of type Node	
+		a.2.3) Node (int d )	//param node constructor//input? data element of node  //function? creates a node with value d pointing to null
+			a.2.3.1initialize data = d
+			a.2.4) Initialize next = null	
+b) Create method printList	
+	How to print linked list?
+	b.1) point a node to head of linkedList l1
+	b.2) while n1 is not equal to n
+		print data in n node
+		point n to n.next which is equal to head.next //store next node's address in pointer n
+	
+
+c) Create main method  //what input?String[] args
+	b.1) Create empty linkedlist list 
+	b.2) input value 1 into list head. 
+		create node1  new	// new  Node(1)
+		insert node1 in linked list as head  //list.head = new Node(1)
+	b.3) Create 2 more nodes 
+		Node second and Node third
+	b.4) Add 2 nodes to linkedlist l1
+		b.4.1) point head node's next pointer to the second node
+			list.head.next = second;				//Second node added to LL l1
+			second.next =third;					//3rd node added to LL l1
+=====================================================================================================
+class LinkedList {
+	
+	Node head;
+	static class Node {
+		int data;
+		Node next;
+		Node(int d) 
+		{
+			data = d;
+			next = null;
+}
+}
+}
+
+public void printList(){
+	Node n = head;
+	while(n != null)
+		System.out.print(n.data + " ");
+		n = n.next;
+}
+
+public static void main(String[] args)
+{
+	Linkedlist list = new LinkedList();	//note we didnt define , java auto adds constructor
+	list.head = new Node(1);
+	Node second = new Node(2);
+	Node third = new Node(3);
+	list.head.next = second;
+	second.next = third;
+
+	list.printList();
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What is time complexity?
+Time Complexity	Worst Case	Average Case
+Search	O(n)	O(n)
+Insert	O(1)	O(1)
+Deletion	O(1)	O(1)	
+
+
+Auxillary space complexity? O(n)	
+//more nodes, more data -> increase linearly

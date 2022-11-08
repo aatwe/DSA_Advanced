@@ -1,0 +1,322 @@
+Algo
+1) Create class BinarySearchTree	
+	//extend Comparable<T>	(takes type comparable/orderable)
+
+2) What variables needed?
+	private int nodeCount = 0;
+	//How many nodes in BST
+	private Node root = null;
+	What is the root of BST
+
+3) Create a node structure/class
+	What will node class/structure contain?
+	a) data element of type T
+	b) left and right pointer of type node
+	
+	c) Node constructor param  //what input? left, right and elem
+			//How to make sure current instance is initialized only?
+				this keyword
+		initializes?
+		data
+		left and right
+	
+4)  public boolean isEmpty() {
+	//Is our binary search tree empty?
+	return size() ==0;	
+}
+5) public int size()
+	How many nodes in BST?
+
+6) public boolean add(T elem)	//create 2 add methods?
+				other one for recursive
+	What input? element to be added to BST
+	What output? true or false if successful or not
+a) If element already in BST -> return false;
+    else if element not found
+	add element to binary tree
+	How to add element to binary tree
+	using a private add() method
+
+7) private Node add(Node node, T elem) {
+//What input? which node to add? what element to add?
+How to add element to binary tree? Recursively
+	if the node entered in parameter is null
+	  create a new node with left : null , right : null and value: elem
+
+	else
+	if element to be added is <  already +nt node's data
+	add to left sub tree
+	else  add to right sub tree
+
+	after adding element ->  return node	
+
+8) public boolean remove(T elem) 
+	What input? what element to remove from BST
+	How to remove? recursively and using private remove() method
+ 	//First start at root
+	root = remove(root,elem);
+	nodeCount--;
+	return true;
+              }
+              return false;
+}
+9) What input? what element to remove? What node is element at?
+	if node == null -> element does not exist 
+		return null	
+1) Find the to be removed node
+ 	if elem< current node data
+	  a)dig left subtree
+	else if elem > currentnode data
+	  a) dig right subtree
+2)once found
+	//remove the elem node
+	//replace left subtree root node to elem node place
+
+	else if elem = currentnode data //i.e elem to be removed found
+	  a) If it has left subtree only  //node.right == null	
+		a.0) store the left subtree root node Node leftChild
+		a.1) remove the node data
+		a.2) remove the node
+		a.3) return the left subtree root node as leftChild
+	 b) if it has right subtree only //node.right == null
+		b.0) store the right subtree root node in Node rightChild
+		b.1) remove the node data
+		b.2) remove the node
+		b.3) return the right subtree root node as rightChild
+	c) if it has both left subtree and right subtree 
+		//find either largest node in left or smallest in right subtree and satisfy variant
+		//we choose leftmost node in right subtree
+		//how will we find? using digLeft() method
+		c.0) dig left
+		c.1) swap node data with digged node data
+		c.2) node.right = remove(node.right, tmp.data);	
+		//if we chose rightmost node in left subtree
+		d.0) Node.tmp=  digRight(node.left);
+		d.1) node.data = tmp.data;
+		d.2) node.left = remove(node.left, tmp.data); 	
+3) return removed node in end
+
+
+10) digLeft(Node node)
+	What input? dig left to which node?
+	How to find leftmost node from node in BST
+	
+	a) create a node cur and point to node node
+	b) while node to the left of cur isnt null
+		keep traversing left
+	c) when null reached , return cur
+	
+11) digRight
+
+12) contains(T elem)
+	What input? element elem of type T from comparable
+	Check if element elem exists in BST
+	How to check? 
+	START CHECKING FROM ROOT
+	//private contains(root,elem)
+
+13) private boolean contains (Node node, T elems)
+	What input? what element to check, which node to check
+How to check? 
+	a) if reached bottom(node == null), not found -> return false;
+	b) if elem < node.data (cmp <0 , cmp = elem.compareTo(node.data))
+		do contains  check on left child node
+	 	contains(node.left, elem);
+	c) if elem > node.data (cmp >0 , cmp = elem.compareTo(node.data)
+}		do contains check on right child node
+		contains(node.right, elem);
+	d) if elem = node.data // node found
+		return true;
+
+14) public int height
+	How to find height of tree O(n)
+	height(node);
+}
+
+15) private int height(Node node) {
+	//How to find height of BST? add +1 for every recursion for depth
+	max of height from left or right
+
+   if(node == null) return 0;
+   return Math.max(height(node.left), height(node.right)) + 1;	
+}
+
+16) 
+public java.util.Iterator <T> traverse(TreeTraversalOrder order){	
+	What input? TreeTraversalOrder
+			enum type
+		What is this enum TreeTraversalOrder?
+		  Open it: TreeTraversalOrder.java
+		public enum TreeTraversalOrder {
+		  PRE_ORDER,
+		  IN_ORDER,
+		  POST_ORDER,
+		  LEVEL_ORDER
+}
+Note: We do these Order traversal Iteratively
+		Recursively: slower and less convinient
+
+	For every order: indorder, preorder, postorder, levelorder
+		we return -> iterator
+		  what is iterator? object used to loop/traverse collections
+			like ArrayList , HashSet
+
+	switch(order) {
+	  case PRE_ORDER: return preOrderTraversal();
+	  case IN_ORDER: return inOrderTraversal();
+	  case POST_ORDER: return postOrderTraversal();
+ 	  case LEVEL_ORDER: return levelOrderTraversal();
+	  default: return nulll;
+}
+}
+//Returns iterator to traverse tree in preorder  //Check GITHUB
+private java.util.Iterator <T> preOrderTraversal() {
+}
+private java.util.Iterator <T> inOrderTraversal() {
+}
+private java.util.Iterator <T> postOrderTraversal() {
+}
+private java.util.Iterator <T> levelOrderTraversal() {
+}
+
+	
++++++++++++++++++++++++++++++++++++++++++++++
+Code
+public class BinarySearchTree <T extends Comparable<T> {
+
+private int nodeCount = 0;
+private Node root = null;
+
+
+private class Node {
+  T  data;
+  Node left, right;		
+public Node(Node left, Node right, T elem){
+	this.data = elem;
+	this.left =left;
+	this.right = right;
+}
+}
+4) public boolean isEmpty() {
+	return size() ==0;
+}
+5) public int size() {
+	return nodeCount;	
+}
+6) public boolean add(T elem){
+	if(contains(elem)) {
+	   return false;
+} else {
+	root = add(root, elem);	
+	nodeCount++;
+	return true;
+}
+
+7) private Node add(Node node, T elem){	//returns node
+	if(node == null){
+		node = new Node (null, null , elem);
+} else {
+	if(elem.compareTo(node.data) < 0) {	//compare elem and node.data
+		node.left  = add(node.left, elem);
+}else {
+		node.right = add(node.right, elem);
+	}
+  }
+return node;
+})
+
+8) public boolean remove(T elem){
+if(contains(elem)){
+	root = remove(root,elem);
+	nodeCount--;
+	return true;
+              }
+              return false;
+}
+}
+9) private Node remove(Node node, T elem) {
+if(node == null) return null;
+int cmp = elem.compareTo(node.data);
+
+if (cmp < 0) {
+   node.left = remove(node.left, elem);
+ } else if (cmp > 0) {
+  node.right=  remove(node.right, elem)
+}
+   else {
+	if(node.left == null) {
+	  Node rightChild = node.right;
+	
+	  node.data = null;	
+	  node = null;
+	
+	 return rightChild;
+}  else if (node.right == null) {
+   Node leftChild = node.left;
+	node.data = null;
+	node = null;
+	return leftChild;
+} else{
+	Node tmp = digLeft(node.right);		//successor node
+	node.data = tmp.data;
+	node.right = remove(node.right, tmp.data);	//why doing this? to avoid duplicate values in BST	
+}
+	//or use the other choice as written in algo
+}
+}
+
+return node;
+
+10)
+private Node digLeft(Node node) {
+	Node cur = node;
+	while(cur.left != null)
+	  cur = cur.left;
+	return cur;
+
+11)
+private Node digRight(Node node) {
+	Node cur = node;
+	while(cur.right != null)
+	  cur = cur.right;
+	return cur;
+}
+
+12) public boolean contains (T elem) {
+   return contains(root, elem);	
+}
+13) private boolean contains(Node node, T elem) {
+   if(node == null) return false;
+ 
+int cmp = elem.compareTo(node.data);
+
+if(cmp < 0) return contains(node.left, elem);
+
+
+elseif(cmp >0) return contains(node.right, elem);
+
+else return true;
+}
+
+14) public int height
+
+15)) private int height(Node node) {
+
+16) public java.util.Iterator <T> traverse(TreeTraversalOrder order){
+	switch(order) {
+	  case PRE_ORDER: return preOrderTraversal();
+	  case IN_ORDER: return inOrderTraversal();
+	  case POST_ORDER: return postOrderTraversal();
+ 	  case LEVEL_ORDER: return levelOrderTraversal();
+	  default: return nulll;
+}
+}
+private java.util.Iterator <T> preOrderTraversal() {
+}
+private java.util.Iterator <T> inOrderTraversal() {
+}
+private java.util.Iterator <T> postOrderTraversal() {
+}
+private java.util.Iterator <T> levelOrderTraversal() {
+}
+}

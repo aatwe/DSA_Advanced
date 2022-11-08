@@ -1,0 +1,19 @@
+What is data structure?
+
+way to organize data
+	why organize? to use efficiently
+	Organized data can be accessed, queried / updated quickly
+
+How to organize data?
+
+
+Why are data structures important
+	ingredients of fast and powerful algo
+	help manage and organize data
+	keep code clean and easy to understand
+
+
+
+What excellent programmers do? 
+	Know how to use data structure
+	          when to use a data structure	

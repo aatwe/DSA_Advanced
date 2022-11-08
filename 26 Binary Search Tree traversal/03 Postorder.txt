@@ -1,0 +1,21 @@
+prints after the recursive call
+
+postorder(node):
+if node == null: return
+Postorder(node.left)
+Postorder(node.right)
+print(node.value)
+
+
+		11
+	        /	         \
+	     6	          15
+	/       \	      /       \
+             3          8	  13            17
+           /    \	/     \            \
+        1	  5         12     14           19
+
+Inference:
+//we can see that 11 will be printed last
+
+1 , 5, , 3 , 8 , 6 , 12 , 14, 13 , 17, 19 , 15 ,11

@@ -1,0 +1,35 @@
+1) Implement stack using SLL
+
+What is Head? stack top
+When is stack empty? head points to null
+	what is null representing? bottom of stack
+
+
+Where will we insert elements? Before the head of LL
+	Why ? pointers point correct when we pop
+
+
+Ex1)
+push(4)
+push(2)
+push(5)
+push(13)
+
+head
+13---> 5 ---> 2 ---> 4 ---> Null
+
+
+How to pop elements?
+move head pointer to next node and deallocate top node
+how to deallocate in java?set node reference as null // java garbage collector picks up
+	//why deallocate? to avoid memory leaks
+	  memory leaks in DS worst!
+
+
+
+
+
+
+
+
+	

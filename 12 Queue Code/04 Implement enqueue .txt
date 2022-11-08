@@ -1,0 +1,71 @@
+How to implement
+
+
+1) Enqueue : Using arrays/SLL/DLL	
+	//note need big enough static array
+	  dynamic array //all good
+
+A) using Single Linked List		//enqueue at tail, //dequeue at head
+
+How many pointers needed? 
+	Head and tail
+
+1) when no elements in list , head and tail will be null
+2) when we insert new node
+	tail -> null gets shifted forward
+
+How to create queue?
+1) Create class queue
+  a) Create linked list
+  b) Queue constructor default
+  c) Queue constructor param	//creates queue with first elem
+	how? offer() method
+	   how? .addLast(elem)
+
+  d) return size of SLL linked list
+  e) isEmpty() method : check if linked list is empty
+  f) peek() method: peek at first element, dont allow if LL is empty
+	How to return first element?peekFirst() method
+  g) poll() //removes element from front of queue	//DEQUEUE
+	cant poll if queue empty. if queue empty throw runtime exception
+	how to poll? removeFirst method on linked list object list
+		list.removeFirst()
+
+h) offer(T elem) //add elem to back of linked list queue	//ENQUEUE
+	how to add? addLast(elem);
+
+i) Add iterator //helps to iterate through all elements of queue
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+public class Queue <T> implements Iterable <T> {
+  private java.util.LinkedList <T> list = new java.util.LinkedList <T> ();
+  public Queue() {}
+  public Queue(T firstElem) {
+    offer(firstElem);
+}
+  public int size() {
+    return list.size();
+}
+  public boolean isEmpty() {
+   return size()== 0;
+}  
+  public T peek() {
+   if (isEmpty())
+     throw new Runtimeexception("Queue Empty")
+}
+  public T poll() {
+   if(isEmpty())
+	throw new RuntimeException("Queue Empty");
+  return list.removeFirst();
+}
+
+  public void offer(T elem) {
+	list.addLast(elem);	
+}
+
+@Override public java.util.Iterator <T> iterator() {
+	return list.iterator();
+}
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++
+b) Create queue with arrays (HW)

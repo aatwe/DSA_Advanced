@@ -1,0 +1,14 @@
+Where are binary trees used?
+
+1) Map and Set ADTs
+2) Red Black Trees
+3) AVL Trees
+4) Splay Trees
+etc
+
+
+Binary Heaps implementation
+
+Syntax trees (compiler/calc)
+
+Treap : Probablistic DS (Uses randomized BST)	

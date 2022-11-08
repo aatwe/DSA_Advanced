@@ -1,0 +1,161 @@
+Polling: O (log(n))		//removing root , know where
+Removing : O(n)		//removing naive, have to find element using linear search
+
+Removing : O(log(n))
+	Using Hash table
+
+	Alternative? do lookup using Hashtable
+		It will find where node is indexed	
+		how lookup isdone?
+		 	Every node value  is mapped to index
+			just look up the node instead of linear scan	
+	
+			What if heap has 2 nodes  with same values
+			  solution : map 1 value to multiple solutionss
+			   (make a set/treeset of indices)
+			   (1 value : maps to set of indices)
+		
+	
+We can see below : 2 occurs 3 times in binary heap
+		2
+	/		\
+	7		2
+            /	     \	          /	        \
+         11        7	      13             2
+
+
+Q) What is hash table for above binary heap?
+			
+Node value		Position index
+2			0 , 2 , 6
+7			1 , 4
+11			3
+13			5	
+
+Q) how movement in nodes affect hash table?	
+	update index
+
+
+QImp) How to decide which node to remove from repeating nodes?
+	for ex 7
+	which one to remove?Does it matter which one we remove?
+	NO, DOESNT MATTER , remove any
+	Heap invariant should satisfy thats it
+
+
++++++++++++++++++++++++++++++++++++++++++++++
+Given:
+a) Hash table
+Node value		Position index
+2			0 , 2 , 6
+7			1 , 4
+11			3
+13			5	
+
+b) Binary Heap
+		2
+	/		\
+	7		2
+            /	     \	          /	        \
+         11        7	      13             2
+
+c) Instructions
+	insert(3)
+	remove(2)
+	poll()
+
+
+Objective : Perform instructions
+A) Insert(3)
+	a) where to insert? leftmost(last element in so called array)
+		2
+	/		\
+	7		2
+            /	     \	          /	        \
+         11        7	      13             2
+      /
+   3
+	//3 is inserted
+
+	b)  Check if heap invariant satisfy?
+	if not : bubble up/ bubble down
+
+	   b.1) bubble up
+		swap 11- 3
+		swap 7  - 3
+		2
+	/		\
+	3		2
+            /	     \	          /	        \
+         7           7	      13             2
+      /
+  11
+
+
+	//3 successfully inserted
+
+B) remove(2)
+		2
+	/		\
+	3		2
+            /	     \	          /	        \
+         7           7	      13             2
+      /
+  11
+A) Check hash map, we have 3 2s and 0 , 2 , 6 index
+	Which one to remove? remove any, just satisfy heap in variant
+		//choose comfortable option that satsifies quick
+
+	//using look up, instead of linear search, we decide lets remove root one 2
+
+B) remove 2 at index 0
+How to remove 2 at 0		
+
+
+	b.1)  Swap root with last node (in so called array) i.e 11
+
+	b.2) Remove 2 from last node
+
+		11
+	/		\
+	3		2
+            /	     \	          /	        \
+         7           7	      13             2
+      /
+  
+	*2// is removed	
+
+
+	b.3) Check if heap invariant satisfies
+		if not bubble down
+			//choose smaller value to bubble down swap
+
+		2
+	/		\
+	3		11
+            /	     \	          /	        \
+         7           7	      13             2
+
+
+		2
+	/		\
+	3		2
+            /	     \	          /	        \
+         7           7	      13               11
+
+	//Heap invariant is satisfied
+	//2 is removed successfully
+
+C) Poll()	//remove root value
+	c.1) Get root value and swap with last element
+	c.2) remove 2
+	c.3) bubble up/down
+
+
+		11
+	/		\
+	3		2
+            /	     \	          /	       \ 
+         7           7	      13              *
+
+				//*2 removed 

@@ -1,0 +1,163 @@
+
+Q) How do we implement priority queue? We use some form of heap
+	Why do we use heap? Best TC for PQ operations in data structures
+
+Q) Is PQ a Heap? No, it is ADT
+		What is ADT? defines behaviour priority queue should have
+		    How to define that behaviour? Heap //implement the behaviour 	
+					//could also use Unorderedlist
+
+Q) Types of heap?
+	
+	a) Binary Heap 
+		 
+	b) Fibonacci Heap
+	c) Binomial Heap
+	d) Pairing Heap
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Objective:
+Implement PQ with Binary heap
+
+Terms to know:
+
+1) What is Binary heap? Binary tree supporting heap invariant
+		      what is binary tree? every node has 2 child (bottom nodes also have null children)
+
+2) What is complete binary heap?
+	A) Except last level: all levels should be completely filled , for ex if total 5 levels : every node on level 1 should have 2 nodes , every node on level 2 should have 2 nodes, level 3 : every node:  2 nodes
+	B) 																		level 4: allowed not not have full
+
+	When inserting nodes : insert at bottom left to meet property
+		1) nodes filled at all levels
+		2) nodes far left 	
+	Why follow this proprty?
+		Gives us a point of insertion irrespective of what heap looks like
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) How to represent Binary Heap using array? Left to right starting at top as index 0
+
+		9
+	     /	           \
+	  8  	            7
+	/     \	        /	\
+             6         5	      1        2
+          /    \     /   \        /   \    /   \
+        2     2   3     4      0    1  2    1
+
+What is index tree for above binary heap?
+		
+		0
+	     /	           \
+	  1  	            2
+	/     \	        /	\
+             3         4	      5         6
+          /    \     /   \        /   \    /   \
+        7     8   9     10   11  12  13   14
+
+
+
+Array representation 1
+values	9	8	7	6	5	1	2	2	2	3	4	0	1	2	1
+index	0	1	2	3	4	5	6	7	8	9	10	11	12	13	14
+
+
+
+Can we easily access this? Yes
+How?
+give i as parent node, find child node
+
+left child node = 		2i + 1	//i starting at 0
+right child node =       	2i + 2
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) How to Add nodes/elements  to binary heap?		//condition? //while maintaining heap invariant
+
+
+		5
+	     /	           \
+	  6  	            12
+	/     \	        /	\
+             8         7	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11     
+
+
+Given::
+	//min heap
+Insert(1)
+Insert(13)
+Insert(4)
+Insert(0)
+Insert(10)
+
+A) Start bubbling up as per instructions
+	A.1) insert 1 to left
+
+		5
+	     /	           \
+	  6  	            12
+	/     \	        /	\
+             8         7	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11     1
+
+  Check if heap variant satisfies? No : 7 and 1 dont satisfy
+ 		swap the non satisfying pair : 7 and 1
+		5
+	     /	           \
+	  6  	            12
+	/     \	        /	\
+             8         1	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7
+  Check if heap variant satisfies? No : 6 and 1 dont satisfy
+ 		swap the non satisfying pair : 6 and 1
+		5
+	     /	           \
+	  1  	            12
+	/     \	        /	\
+             8         6	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7
+  Check if heap variant satisfies? No : 5 and 1 dont satisfy
+ 		swap the non satisfying pair : 5 and 1
+
+		1
+	     /	           \
+	  5  	            12
+	/     \	        /	\
+             8         6	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7
+	
+	A.2) insert 13 to left
+		1
+	     /	           \
+	  5  	            12
+	/     \	        /	\
+             8         6	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7    13
+  Check if heap variant satisfies? No : 14 and 13 dont satisfy
+ 		swap the non satisfying pair : 14 and 13
+
+		1
+	     /	           \
+	  5  	            12
+	/     \	        /	\
+             8         6	      13       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7    14'
+
+.........Similarly
+Final
+	
+		0
+	     /	           \
+	  5  	            1
+	/     \	        /	\
+             8         6	      12       4
+          /    \       /   \        /   \     /   \
+        13    12  11    7    14' 13 19   10	
+
+
+We have inserted elements into  binary Heap

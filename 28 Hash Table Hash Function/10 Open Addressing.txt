@@ -1,0 +1,222 @@
+B) Open addressing : Store in  same hash table
+	have to track how many elments in hash table	
+	cant find open slow once too many elements
+
+	Load Factor = items in table / size of table
+
+Algo:
+\if we compare chaining vs linearprobing
+
+	once a threshold reached -> linear probing becomes exponentially bad		//0.8
+	keep load factor (alpha) < certain threshold
+	
+a) When to grow size of table? when threshold met
+
+
+b) How to insert key value pair in hash table?
+
+	H(k) -> get index -> hash collision
+	How to solve hash collision?
+	Probing sequence
+		What does probin sequence do? finds open slots		`
+		a) How to decide where to go next? probing sequence -> finds open slots 
+		b) Probing sequences
+		//start x at 0 or 1	//What is x? variable used in prbing function  //if we cant find free slots ->increment by 1
+				
+			1) Linear Probing : uses a linear function
+				P(x)=  ax + b	
+			2) Quadratic Probing
+				P(x) = ax^2 + bx + c
+			3) Double Hashing : define another hash function -> use its value in probing function
+				P(k,x) = x*H2(k) , where H2(k)
+			4) Pseudo Random number generator
+				P(k,x) = x*RNG(H(k), x)
+				How to seed? using hash valueof key i.e H(k)  --> Use in probing function
+
+
+Ex
+Given: Table of size n
+
+1) Initialize x to 1 // x: = 1
+2) Find first index to look at
+	Hash your key H(k)
+	// keyHash := H(k)
+	    index := keyHash
+	
+
+3) if index != null and collision happening	
+	new index = (original index + P(k,x)]mod N		//mod helps to stay in table
+	x = x + 1;						//if new index is not free, keep doing and increment x
+							//How do we know if we will always fiind free slot? load factor is below and amount 
+	while table[index] != null:
+	  index = (keyHash + P(k,x)) mod N
+	x = x + 1
+4) 	
+	insert(k,v) at table[index]
+
++++++++++++++++++++++++++++++++++++++
+Q) What is the issue with open addressing/probing cycles?
+
+Most probing sequence cycles around in small range
+	range v < table size	
+	for ex table size : 10
+	probing sequence hopping bw 3 slots
+	And all 3 slots are full -> stuck in infinite loop
+
+for ex if P(x) = 3x
+H(k) = 4
+N = 9 = table size
+
+H(k) = P(0) mod N = 4
+H(k) = P(1) mod N = 7 
+H(k) = P(2) mod N = 1
+H(k) = P(3) mod N = 4
+H(k) = P(4) mod N = 7
+H(k) = P(5) mod N = 1
+H(k) = P(6) mod N = 4
+H(k) = P(7) mod N = 7
+H(k) = P(8) mod N = 1
+
+if 4,7,1 are occupiued -> infinite loop
+
+How to handle?
+
+We have to find
+which values in P(x) = ax produce full cycle on modulo N
+Ans : a and N are relatively prime
+		i.e GCD(a,N) = 1 -----> They wont run into infinite loop
+		//Probing function generates complete cycle ---> we can find an empty bucket
+
+Given hash table
+
+0 	1 	2 	3 	4 	5 	6 	7 	8 	9 	10	11
+k1v1       null	null	k2v2	k3v3	k4v4	null	null	k5v5	null	k6v6	null
+
+
+P(x) = 6x
+N = 9
+Max load factor alpha = 0.667 
+Threshold before resizing: N*alpha = 6		//gotta resize when hit 6
+Assume H(k2) = 2
+
+Q) Will we run into infinite loop while inserting for above? Yes
+		Why? GCD(9,6) = 3
+		9 and 6 are not relatively prime ----> will run into infinite loop
+
+Try insering
+1) insert(k1,v1)
+
+Hash Function	//x = 0
+Suppose H(k1) = 2
+[H(k1) + P(0)]mod N
+    2     +   0  mod 9= 2
+
+0 	1 	2 	3 	4 	5 	6 	7 	8 	
+null       null	k1v1	null	null	null	null	null	null	
+
+
+2) insert(k2,v2)
+Suppose H(k2) = 2
+2a) 
+Hash Function
+[H(k2) + P(0)]mod N	//x=0
+    2     +   0  mod 9= 2
+			//Hash collision encounter
+			//increment x
+
+2b) x = 1
+[H(k2) + P(1)]mod N
+  2      +     6  mod 9 = 8
+			//insert at 8
+
+0 	1 	2 	3 	4 	5 	6 	7 	8 	
+null       null	k1v1	null	null	null	null	null	k2v2	
+
+3) 
+Similarly do for below
+insert(k3,v3)
+Suppose H(k3) = 3
+
+0 	1 	2 	3 	4 	5 	6 	7 	8 	
+null       null	k1v1	k3v3	null	null	null	null	k2v2
+
+4) 
+//note: we reinserting k2, k2 already exist in hash table -> keep updating its value instead of reinserting
+insert(k2,v4)
+//How to update?
+H(k2) + P(0)  mod N 
+  2 + 0 mod 9 = 2		//Hash collision , k2 not found
+
+increment x
+   2  + 6  mod 9 = 8		//k2 found -> update value
+
+
+5) 
+insert(k5,v5)
+0 	1 	2 	3 	4 	5 	6 	7 	8 	
+null       null	k1v1	k3v3	null	k5v5	null	null	k2v4
+
+
+6) Star case***		//HERE WE HIT A CYCLE WHILE PROBING , we expected because GCD(9,6) = 3
+insert(k6,v6)
+Suppose H(k6) = 5
+[H(k6) + P(0)]modN
+   5    +   0   mod9 = 5
+   5    +   6   mod9 = 2  	//Hash collision  //increment x //keep probing
+   5    +  12 mod9 = 8	//Another hash collision //increment and keep probing
+   5    +  18 mod 9 = 5	//Cycle HIT
+ 
+
++++++++++++++++++++++++++++++++
+How to resolve this conflict?
+1) select possible a values
+	GCD (9,1) = 1
+	GCD (9,4) = 1
+	GCD (9,7) = 1
+	GCD (9,2) = 1 
+	GCD (9,5) = 1
+	GCD (9,8) = 1
+	GCD (9,3) 
+	GCD (9,6) 
+	GCD (9,9)	
+
+	a values : 1,2,4,5,7,8
+	Lol what if we choose p(x) = 1 always  , GCD will be 1 always
+
+	HENCE
+
+	P(x) = 1x	//popular probing function
+
+
+Q) What if we reach threshold case
+for ex
+	Our alpha = 0.35
+	N*alpha = 4
+
+1)	after we insert 4th element =>  time to resize table
+
+2)	How to resize table? exponentially
+	but also make sure GCD(N,a)	 = 1
+
+3) 	After doubling
+	N= 24
+	new threshold =  8
+	P(x) does not change
+
+4) Allocate memory for new table
+	Compute new hash values
+5) place elements from old table to new table new hash values
+	loop old table
+	update in new table at new hash value
+		if hash collision in new table -> keep probing -> insert at newer index
+6) remove the old table,keep the new table
+
+7) Continue inserting elements
+
+
+
+
+Q) How to remove key-value pair from hash table using open addressing
+	LATER
+
+	

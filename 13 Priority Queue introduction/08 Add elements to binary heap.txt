@@ -1,0 +1,92 @@
+Q) How to Add nodes/elements  to binary heap?		//condition? //while maintaining heap invariant
+
+
+		5
+	     /	           \
+	  6  	            12
+	/     \	        /	\
+             8         7	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11     
+
+
+Given::
+	//min heap
+Insert(1)
+Insert(13)
+Insert(4)
+Insert(0)
+Insert(10)
+
+A) Start bubbling up as per instructions
+	A.1) insert 1 to left
+
+		5
+	     /	           \
+	  6  	            12
+	/     \	        /	\
+             8         7	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11     1
+
+  Check if heap variant satisfies? No : 7 and 1 dont satisfy
+ 		swap the non satisfying pair : 7 and 1
+		5
+	     /	           \
+	  6  	            12
+	/     \	        /	\
+             8         1	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7
+  Check if heap variant satisfies? No : 6 and 1 dont satisfy
+ 		swap the non satisfying pair : 6 and 1
+		5
+	     /	           \
+	  1  	            12
+	/     \	        /	\
+             8         6	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7
+  Check if heap variant satisfies? No : 5 and 1 dont satisfy
+ 		swap the non satisfying pair : 5 and 1
+
+		1
+	     /	           \
+	  5  	            12
+	/     \	        /	\
+             8         6	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7
+	
+	A.2) insert 13 to left
+		1
+	     /	           \
+	  5  	            12
+	/     \	        /	\
+             8         6	      14       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7    13
+  Check if heap variant satisfies? No : 14 and 13 dont satisfy
+ 		swap the non satisfying pair : 14 and 13
+
+		1
+	     /	           \
+	  5  	            12
+	/     \	        /	\
+             8         6	      13       19
+          /    \       /   \        /   \    /   \
+        13    12  11    7    14'
+
+.........Similarly
+Final
+	
+		0
+	     /	           \
+	  5  	            1
+	/     \	        /	\
+             8         6	      12       4
+          /    \       /   \        /   \     /   \
+        13    12  11    7    14' 13 19   10	
+
+
+We have inserted elements into  binary Heap

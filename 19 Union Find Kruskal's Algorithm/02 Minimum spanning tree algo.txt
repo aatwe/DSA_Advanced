@@ -1,0 +1,77 @@
+1) take out edges from minimum spanning tree
+	sort edges by edge weight in ascending order
+		write nodes for each
+Q) Why are we using union data structure?
+	it helps us provide methods like find() and union()  that helps to find which groups node belong to(to avoid cycles) and  merge groups of color efficiently respectively
+
+
+
+4) When algo ends?
+	Every edge has been processed
+	or 
+	All vertices unified
+
+Algo Goal: Avoid edges that create cycle
+
+figure out
+	a) find() 
+	//Check if in same group
+
+	 b)union() 
+	// merge 2 groups efficiently
+
+for ex
+ I to J = 0
+A to E = 1
+C to I = 1
+E to F = 1
+G to H =1
+B to D = 2
+......
+B to G  = 11
+
+
+2) Start at first edge I to J
+	connects: I and J
+	2a) Check I : belong to none : Orange(new)
+	2b) Check J : belong to none : Orange(new)
+
+3)  Check A to E
+	connects A and E
+	3a) Check  A : belongs to none : Purple(new) 
+	3b) Check  E : belongs to none : Purple(new) 
+
+4) Check C to I
+	connects C and I
+	4a) Check C : Belongs to none  : Orange (grouped new)
+	4b) Check I  : belongs to Orange    Orange(old)
+
+5) Check E to F
+		Check E : belongs to purple  :  Purple(old)
+		Check F 	belongs to none    :  Purple(grouped new)
+
+6) Check G to H
+		Check G : Belongs to none    : Red (new)
+		Check H : Belongs to none    : Red (new)
+
+7) Check B to D
+		Check B  : Belongs to  none  : Green(new)
+		Check D : Belongs to none   : Green(new)
+
+8)* Check C to J	//Skip
+	
+		Check C : Belongs to Orange		//Why skip? it creates cycle
+		Check J  : Belongs to Orange		//why cycle? CI and CJ both belong to a group already , including CJ adds them again in Orange
+		//Summary : Avoid
+						//How will we check in code if in same group? Find() operation in unionFind()
+
+9)*Check D to E
+		Check D : Belongs to Green   :  Purple	//Purple can become green or green can become purple	//doesnt matter
+		Check E :  Belongs to Purple  :  Purple	//union operation becomes useful	
+						How to merge? Union() of Union Find
+
+......
+
+
+In the end all become one color : purple
+Minimum spanning tree found

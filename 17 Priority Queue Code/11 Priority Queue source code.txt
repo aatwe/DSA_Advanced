@@ -1,0 +1,472 @@
+Algo
+
+1) import java.util.*
+
+2) Create class PQueue
+	What type elements allowed in Pqueue?
+	Elements implementing Comparable  interface
+
+2a) Currently how many elements inside heap?
+	heapSize
+
+2b) How many element can be stored in heap?
+	heapCapacity = 0;
+
+2c) Create a heap, how ? using java dynamic list
+
+2d) Map element to treeset of integers
+	What is this map? track indexes for node value in binary heap
+	gives us more efficient: O(log(n)) removal
+	and also O(1) element containment check
+	What cost? some additional space + overhead
+
+2e) default constructor for PQ
+
+2f) Param constructor for PQ
+	What input? initial capacity
+	What will param constructor do? construct priority queue using heap
+
+2g) Another param constructor for PQ 					//Prefer to use heapify
+	 What input? elements to put inside heap in form of array
+	construct  priority queue in O(n) 
+	how? Heapify 
+
+	1) define heapSize
+	2) create heap using heap capacity
+	3) loop to add elements to the heap
+		how to add elements?
+		a) Add elements to map: mapAdd()  
+		b) Add elements to heap heap.add 
+		
+	4) Heapify O(n)
+		a) Start at half of heap size
+		b) loop back and sink all elements	//note this is O(log(n)) but overall still O(n) //check heapsort analysis on why this is linear complexity
+				//basically complexity boils down to converted series hence O(n)
+
+2h) Another param constructor for PQ	O(log(n))
+		What input?
+		a) initialize heap, how? this(elems.size());	
+		b) add elements to heap how? add() method
+			for( T elem : elems) add(elem);
+
+2i) isEmpty() method
+	returns true or false if empty or not
+
+
+2j) clear() method
+	clears elements from heap array in O(n)
+	clear elements from map
+	set size as 0
+
+	heap.set(i, null);	
+	heapSize = 0;
+	map.clear();
+
+2k) peek() method
+	peeks at first element of priority queue
+	if empty : return null
+	if not : lookup first index from heap using get()
+
+2l) poll() method
+	removes and returns root element of binary heap in O(log(n))
+	how to remove? removeAt(0);
+
+2j) contains() method
+	What input? element of type T
+	how to check if contains?			//O(1)
+	Check in map if element is there using containsKey() method		
+	map has some overhead though
+
+		if(elem == null) return false;
+		return map.containsKey(elem);
+
+	Other way to check: O(n)? if we dont have map maintained can use below:
+	Use get(i) to get element value from heap
+
+	for(int =0; i< heapSize; i++)
+		if(heap.get(i).equals(elem))
+		return true;
+	          return false;
+
+2k) void add(T elem)
+	What input? element to add in heap
+	How to add?
+		a) check if element is null , dont add
+		b) check if there is space
+			check if heapSize < heapCapacity
+		b.1) if heapSize < heapCapacity  // i.e heapCapacity is avail
+			add element, how? set() method
+			heap.set(heapSize, elem);
+
+		b.2) if heapSize = heapCapacity // i/e heap Capacity is not avail
+			a) Add element
+			heap.add(elem)
+			b) Increase heapCapacity
+			heapCapacity ++
+
+		c) After elem added to heap, add element to map also
+			mapAdd(elem, heapSize);
+			
+		d) swim up / bubble to satisfy heap invariant
+			swim(heapSize);
+
+		e) Increment heapSize() by 1 , since 1 element is added
+			heapSize++;
+			
+
+2l) less() method
+	check if node i < node j
+	what input? 2 indices
+	How to compare?
+		get both node values from heap
+		compare both values using compareTo() method		//method comes from  class PQueue <T extends Comparable<T> 	//comparable interface
+	
+		T node1 = heap.get(i);
+		T node2 = heap.get(j);
+		return node1.compareTo(node2) <= 0
+
+2m) swim(int k)
+	How swim works?
+	What input? k index where node added
+	find next parent node wrt to k	
+
+	if variant not satisfied
+	i.e k < parent and we havent reached root
+	  swap (parent, k)
+	  k becomes the new parent 
+
+	 find new parent of this new position of k
+
+2n) sink() method
+	How sink works?
+	What input? position k
+	a) grab left child node
+		int left = 2* k+ 1;
+	b) grab right child node
+		int right = 2*k + 2;
+	c) find the lesser of 2
+		ca) How to find lesser?
+		//assume then correct if needed
+		int smallest = left;	//assume left is smallest
+
+		if(right < heapSize && less(right, left))		// right node < left node in value
+		smallest = right;
+	
+	d) Check heapSize not out of bound		//check if index >= heapSize  or if k is smaller than smallest
+						//if yes : break
+		if(left >= heapSize ||less(k, smallest)) break;
+		
+		cb) Pick lesser node 
+
+	d) swap (root with lesser of two)
+		swap(smallest, k)
+	e) make k the smallest
+		k  = smallest
+	
+2o) Swap()
+	What input? 2 nodes
+	if i and j are valid , swapping is O(1)
+	a) set the swapped values in heap
+	b) swap values in map			//this is why overhead in map, also have to swap things in map
+
+
+2p) remove()		
+	What input?  T element
+
+	if element is null return false
+	How to remove?
+	1) Linear removal
+		loop through all elements of heap
+			if we find element we looking for, remove att that index , using removeAt(i);
+						and return true;
+	2) Using Map
+	Get element index,
+		how?Integer index = mapGet(element);		
+	if exists remove the index
+		if (index!=null)removeAt(index);
+	return index != null;
+	
+
+2q) removeAt() 	removes a node at a particular index in O(log(n))
+	0) Check if heap is empty , if empty cant remove : return null	//if(isEmpty()) return null;
+	1) if heap not empty : traverse the linked list to that index		
+	2)  after reaching index, swap (index, last_element)		//where is last_element? heapSize	//swap(i, heapSize);
+	3) after swapping, remove that node from heap			//heap.set(heapSize, null)
+	4) remove node from map					//mapRemove(removed_data, heapSize());
+	5)  What if we removed the last element? just return the removed data	//if(i  == heapSize) return removed_data;
+		get the element from i			//T elem = heap.get(i)
+		try sinking that				//sink(i)
+		if  node is still there, means sinking didnt work	//if( heap.get(i).equals(elem))
+		  try swimming				//swim(i)
+
+		return removed_data; 
+
+2r) isMinHeap()
+	//this method uses recursion.
+	Why are we using recursion?
+		What input? element  id
+		What method does? Checks if heap invariant satisfies, by starting at node 0
+					Checks if min heap
+		How to check if variant satisfy?
+		
+		a) if element outside bound?	(k>=heapSize)					//Base case of recursion
+			 return true
+		b) find left and right node for k
+			left = 2*k + 1;
+			right= 2*k + 2;
+
+		c) Check if left and right are in bound and are not less than k, if they are return false
+			if(left < heapSize && !less(k, left)) return false;	//k is > both children
+			if(right < heapSize && !less(k, right)) return false;
+			
+
+			return isMinHeap(left) && isMinHeap(right);				// Recurse on both child nodes
+											//Why AND? if even one single is not
+	
+2s) private void mapAdd()	//map helper method
+		//What does it do? add to map
+	How to add to map? 
+	using treeSet // in java treeSet is Balanced binary Search tree		O(log(n))
+	
+	a) //Create Tree set of integer
+	TreeSet <Integer> set = map.get(value);
+	
+	b) insert value in map using treeSet
+	//Create new treeSet
+	set = new TreeSet<> ();
+	//How to add to treeset?
+	set.add(index);	
+	//How to add to map using Treeset
+	map.put(value, set);
+	}  
+	c) What if value exists in map 
+	else set.add(index);
+			
+
+2t)	private void mapRemove(T value, int index)
+	What does it do.? removes index from map	O(log(n))
+	How to remove from map?
+	
+	a) Create TreeSet
+		TreeSet <Integer> set = map.get(value);
+	b) get value from map using treeset
+		TreeSet <Integer> set = map.get(value);
+	
+	mapRemove(T value, int index) {
+	c) 	
+		set.remove(index);
+		if(set.size() == 0) map.remove(value);
+	}
+
+
+2u) 	Swap inside map
+	How to exchange index of 2 nodes internally within map?
+	
+		
+private void mapSwap(T val1, T val2, int val1Index, int val2Index) {
+	  Set <Integer> set1 = map.get(val1);
+	  Set <Integer> set2 = map.get(val2);
+	
+	set1.remove(val1Index);
+	set2,remove(val2Index);	
+	
+	set1.add(val2Index);
+	set2.add(val1Index);
+}
+
+@Override public String toString(){
+	return heap.toString();
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Source code
+
+
+1) import java.util.*;
+
+2) class PQueue <T extends Comparable<T> {
+
+2a) private int heapsize = 0;
+
+2b) private int heapCapacity = 0;
+
+2c)  private List <T> heap = null;
+	
+2d) private Map <T, TreeSet<Integers> map = new HashMap<>();
+
+2e) public PQueue() {
+	this(1);
+}
+
+2f) public PQueue(int sz) {
+	heap = new ArrayList<>(sz);
+}
+
+2g)
+	public PQueue (T[] elems) {
+	heapSize = heapCapacity = elems.length;	
+	heap = new ArrayList<T>(heapCapacity)
+	
+	for(int i =0; i< heapSize; i++) {
+	   mapAdd(elems[i], i);
+	   heap.add(elems[i]);
+}
+
+	for(int i=Math.max(0, (heapsize/2) -1); i>=0; i--)
+{
+		sink(i);
+}
+
+2h) 	public PQueue (Collection <T> elems) {
+	  this(elems.size())
+	for(T elem : elems) add(elem);
+}
+ 
+	public boolean isEmpty() {
+		return heapSize ==0;
+	}
+2i) 	public boolean isEmpty() {
+		return heapSize == 0;
+	}
+
+2j)	public void clear() {
+	  for(int i=0; i< heapCapacity; i++)
+	 	heap.set(i, null);
+	  heapSize = 0;
+	  map.clear;
+}	 
+}
+
+
+2k) 	public T peek() {
+	   if(isEmpty()) return null;
+	  return heap.get(0);
+	}
+
+2l) 	public T poll() {
+	   return removeAt(0);
+	}
+
+2m) 	public boolean contains(T elem) {
+	if(elem ==NULL) return false;
+	return map.containsKey(elem);
+
+2n) 
+	public void add(T elem) {
+	if(elem == null) throw new IllegalArgumentException();
+	if(heapSize < heapCapacity) {
+	  heap.set(heapSize, elem);
+	} else{
+	   heap.add(elem);
+	   heapCapacity++;
+}
+	map.Add(elem, heapSize);
+
+	swim(heapSize);
+	heapSize++;
+}
+}
+}
+
+2o) private boolean less(int i, int j) {
+	T node1 = heap.get(i);
+	T node2 = heap.get(j);
+	return node1.compareTo(node2) <= 0;
+}
+
+
+2p) private void swim(int k) {
+	int parent = (k-1)/2;
+	while(k> 0 && less(k,parent))
+
+	swap(parent, k);	
+	k = parent;
+	parent = (k-1)/2;
+}
+}
+
+
+2q) private void sink(int k) {
+	while(true) {
+	int left = 2*k+ 1;
+	int right = 2*k + 2;
+	int smallest = left;
+
+	if(right < heapSize && less(right,left))
+		smallest = right;
+
+	if(left >= heapSize || less(k,smallest)) break;
+	
+	swap(smallest, k);
+	k = smallest;
+}
+
+
+2r) private void swap (int i , int j){
+	T i_elem=  heap.get(i);
+	T j_elem = heap.get(j);
+
+	heap.set(i, i_elem);
+	heap.set(j, i_elem);
+
+	mapSwap(i_elem, j_elem, i, j);
+}
+
+2s) public boolean remove(T element) {
+
+	if(element == null) return false;
+
+	Integer index = mapGet(element);
+	if(index!= null) removeAt(index);
+	return index != null;
+}
+	
+2t) private T removeAt(int i){	//What input? remove element from index i of heap
+	if(isEmpty()) return null;
+	
+	heapSize--;
+	T removed_data = heap.get(i);
+	swap(i, heapSize);
+	heap.set(heapSize, null)
+	mapRemove(removed_data, heapSize());
+	if(i  == heapSize) return removed_data;
+	T elem = heap.get(i)
+	sink(i)
+	if( heap.get(i).equals(elem))
+	swim(i)
+
+	return removed_data; 
+}}}
+
+2u) public boolean isMinHeap(int k){
+	if(k> heapSize) return true;
+	
+	int left = 2*k +1;
+	int right =2*k + 2;
+
+	if(left<heapSize && !less(k,left)) return false;
+	if(right < heapSize && !less(k, right)) return false;
+
+	return isMinHeap(left) && isMinHeap(right);
+ }
+
+2v)
+private void mapSwap(T val1, T val2, int val1Index, int val2Index) {
+	  Set <Integer> set1 = map.get(val1);
+	  Set <Integer> set2 = map.get(val2);
+	
+	set1.remove(val1Index);
+	set2,remove(val2Index);	
+	
+	set1.add(val2Index);
+	set2.add(val1Index);
+}
+
+@Override public String toString(){
+	return heap.toString();
+}
+
+
+
+
+
+

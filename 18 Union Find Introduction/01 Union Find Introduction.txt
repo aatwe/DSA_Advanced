@@ -1,0 +1,46 @@
+What is Union Find?
+Data structure Also Called as Disjoint set
+	what does it do? tracks elements
+		any special type of elements? 
+		  elements split into 1 or more disjoint sets
+				for ex
+		14 Magnets
+		all attracted to each other
+		all want to merge and form some configuration
+		
+We unify magnets into groups
+		unionFind(6,8,9)	    //Blue group
+		unionFind(2,3,4) 	    //Yellow Group
+		unionFind(10,13,14)   //Purple group
+
+if we unifyGroup(Blue and Yellow , Blue) -> assign union group blue color
+	If we do look up -> can find blue group contains all 6
+
+Why use unionFind()? It does merging and finding in efficient way
+		....
+
+What operations on union find?
+	a) find()
+	
+	b) union()
+
+
+What use case:
+
+A)  Kruskal's Minimum Spanning Tree algorithm
+	Basically:
+
+B) Grid Perlocation
+	Dots on grid, 
+	Check if there  is path from bottom to top or vice versa
+	UnionFind helps find path  efficiently using multiple paths
+
+C) Network Connectivity
+
+D) Least common ancestor in trees
+
+
+E) Image Processing
+
+
+Why use union find  

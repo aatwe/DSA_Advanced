@@ -1,0 +1,24 @@
+Combinations: are like subsets as we seeb before	/formed by including/not including
+
+How many subsets in element of n?
+2*2*2*2*2....ntimes = 2^n	(2 subsets for 1 element multiplied for each)
+	for ex what combinations of  [2,4] : itereations?4 : null , 2 , 4 , [2,4] 
+	
+	Advance
+		What these subsets actually are?***
+			(dont include2 ,  dont include 4) , (include 2 ,  dont include 4) , (dont include 2, include 4) , (include 2, include 4) 
+	What is a subset? all possible groups formed by including and not including elements of set	
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+permutation: places are fixed and must be occupied
+for 8 string
+permutations = movement among those 8 places
+
+All permutations of a string?
+		for n length string
+		1st letter : n choices
+		2nd letter : n-1 choice
+		...nth letter: : 1
+			total choices = n*(n-1)*(n-2)*(n-3)....1 = n!
+
+NOTE: REMEMBER EVERYTHING IS A MATTER OF CHOICES

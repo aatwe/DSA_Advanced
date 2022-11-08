@@ -1,0 +1,30 @@
+*Most useful
+
+
+Q)  What is queue
+
+linear DS
+models real world queue
+
+Q) How to insert/delete data?
+2 operations:
+	Enqueue 	/ Adding 	 / Offering	//By default: from front
+	Dequeue / Polling   / Removing	
+
+
+	Where to insert from?front end of queue	//Enqueue
+	Where to remove from? back end of queue	//Dequeue
+
+
+Q) Where is queue used?
+	a) movie line / real world queue models
+	b) if we wanna only track x most recent elements //queue	
+	c) web server management (how to handle more than accepted requests? wait in queue)
+	d) BFS traversal (graph theory)
+
+Q)  Dont forget to 
+	a) label queue front end and back end
+
+
+
+

@@ -1,0 +1,225 @@
+Note:
+the union find is the disjoint set
+
+
+Objective: How find() and Union() operations work
+Instructions:
+Union(C,K);
+Union(F,E);
+....
+
+
+1) How to create UnionFind
+
+Given : Random objects/nodes and Values to map
+What objects in our case? letters : A, B , C , D
+
+
+A) Create Bjection
+	What is Bijection? Mapping between objects <-> integers in range [0,n)
+	 Why create bijection? allows to create a union find that is (Array based)
+		Why create array based union find? v efficient and easy
+			How efficient and easy? dont know yet
+
+B) Do random Bijection
+	assign object to number
+		//can be random // just has to be 1-1
+
+	How to store mappings? Hash Table
+	 Why store? to do a look up and find what is mapped to what
+		A -> 5
+		J -> 6
+		....
+C) Construct an Array
+	What inside the array?
+	each index : Object
+		How to store object in array index? Mapping
+		if A is mapped to 5 , index 5 will be slot for A
+
+
+How Array will look like?How is our mapping stored?  By storing number  //we will store parent nodes
+		E	F	I	D	C	A	J	L	G	K	B	H
+root node	0	1	2	3	4	5	6	7	8	9	10	11
+index to track(fix)	0	1	2	3	4	5	6	7	8	9	10	11
+
+What is the value in array? root nodes are stored for ex A is root node of itself hence 5	
+What is associated object? letter	
+
+
+D) Objective: Perform 
+	Union(C,K)	//we will be tracking root nodes
+	What is this instruction doing? uniifying groups or unifying objects in group
+	We know every node is root node (mapped to itself)
+	How to unify C and K?
+		What is root node of C? 4	//self loop
+		What is root node of K? 9	//self loop
+		What will happen on unifying? Either C becomes parent of k
+					  or        K becomes parent of C
+	
+			We choose C becomes parent of K
+			Update: value in array of K : 9 --> 4	//Why? because C is 4, K Becomes part of C group
+
+		E	F	I	D	C	A	J	L	G	K	B	H
+		0	1	2	3	4	6	6	7	8	4	10	11
+index		0	1	2	3	4	5	6	7	8	9	10	11
+
+E) Objective : Perform
+	Union(F, E)
+	What is this instruction doing? uniifying groups or unifying objects in group
+	We know every node is root node (mapped to itself)
+	How to unify F and E?
+		What is root node of F? 1	//self loop
+		What is root node of E? 0	//self loop
+		What will happen on unifying? Either F becomes parent of E
+					  or        E becomes parent of F
+	
+		We chose E becomes parent of F
+		Update: value in array of F : 1 --> 0
+		
+	
+		E	F	I	D	C	A	J	L	G	K	B	H
+		0	0	2	3	4	6	6	7	8	4	10	11
+index		0	1	2	3	4	5	6	7	8	9	10	11
+
+
+F) Objective: Perform Union(A,B)
+		
+What is this instruction doing? uniifying groups or unifying objects in group
+	We know every node is root node (mapped to itself)
+	How to unify F and E?
+		What is root node of A? 6	//A -> J	//A is root node for group  green J
+		What is root node of B? 10	//Self loop
+		What will happen on unifying? Either A becomes parent of B
+					  or        B becomes parent of A
+	
+		We chose B becomes parent of A	//Why?** Generally smaller become part of larger groups
+		Update: value in array of B : 10 --> 6	// why 6?  green group root node is J
+		
+	
+		E	F	I	D	C	A	J	L	G	K	B	H
+		0	0	2	3	4	6	6	7	8	4	6	11
+index		0	1	2	3	4	5	6	7	8	9	10	11
+
+
+
+G) Union(C, D)
+		
+What is this instruction doing? uniifying groups or unifying objects in group
+	We know every node is root node (mapped to itself)
+	How to unify C and D?
+		What is root node of C? 4	//Self Loop
+		What is root node of D? 3	//Self loop
+		What will happen on unifying? Either C becomes parent of D
+					  or        D becomes parent of C
+	
+		We chose D becomes parent of C	//We know C is parent of K //C is larger group
+	Merge D ->C group(orange)	Update: value in array of D : 3 --> 4	// why 4?  C is root node and its number is 4
+		
+	
+		E	F	I	D	C	A	J	L	G	K	B	H
+		0	0	2	4	4	6	6	7	8	4	6	11
+index		0	1	2	3	4	5	6	7	8	9	10	11
+
+
+
+H) Union(D,I)
+	In end: I->C (parent C)
+	           C->C //self loop
+	           D->C
+	           K->C
+
+
+I) Union(L,F)
+	In the end : F -> E (parent E)
+		  E -> E (self loop)
+	merge L -> E group(Red)		
+
+	
+		E	F	I	D	C	A	J	L	G	K	B	H
+		0	0	4	4	4	6	6	0	8	4	6	11
+index		0	1	2	3	4	5	6	7	8	9	10	11
+
+J) Union(C,A)
+		What is root node of C? 4(C)	//Self Loop
+		What is root node of A? 3(J)	//Self loop
+		What will happen on unifying? Either C becomes parent of A (Orange part of green)	
+					  or        A becomes parent of C (Green part of orange)
+		 	We choose  A becomes parent of C	//why? orange: 4 elements, Green has 3 elements
+					(implicitly: J becomes part of C)
+				J -> C
+
+
+	
+		E	F	I	D	C	A	J	L	G	K	B	H
+		0	0	4	4	4	6	4	0	8	4	6	11
+index		0	1	2	3	4	5	6	7	8	9	10	11
+K) Union(A, B)	
+		Both are already unified together. Why? Both have common root node : C (orange)
+		No need to unify
+
+L) Union(H, G)
+		Dont have group	
+		Merge into new group
+			G -> G //self loop
+			H -> G (Blue group)
+
+		E	F	I	D	C	A	J	L	G	K	B	H
+		0	0	4	4	4	6	4	0	8	4	6	8
+index		0	1	2	3	4	5	6	7	8	9	10	11
+
+
+M) Union(H,F)
+		What is root of H? G(8)
+		What is root of F?  E (0)
+		We choose merge G -> E //why? group G(blue) 2 elements, Group E (3 elements)
+		Blue merged into red
+
+		Update G's root node as 0
+
+		E	F	I	D	C	A	J	L	G	K	B	H
+		0	0	4	4	4	6	4	0	0	4	6	8
+index		0	1	2	3	4	5	6	7	8	9	10	11
+
+
+N) Union(H,B)
+		What is root of H? E(8 ->0)
+		What is root of B?  C (6 -> 4)
+		We choose merge G -> E //why? group G(blue) 2 elements, Group E (3 elements)
+		C(6 elements) vs E(5)
+		Merge E -> C
+
+		Update G's root node as 0
+
+		E	F	I	D	C	A	J	L	G	K	B	H
+		4	0	4	4	4	6	4	0	0	4	6	8
+index		0	1	2	3	4	5	6	7	8	9	10	11
+	
+
+SUMMARY:
+WE HAVE DONE UNION FIND
+
+Q) How to find which object an element maps to 
+		find root of object by following parent node ---> until reach self loop
+
+
+Q) How to unify 2 objects/components?
+		Find root nodes for each
+		if root nodes are different :merge smaller group into larger group, by pointing smaller group's root -> larger group's root
+		if root nodes are same : belong to same object
+
+Q) Can we ununion elements? usually dont
+		inefficient
+		have to update children that point to node
+		Can do in theory maybe
+
+
+Q) How many objects in union find()?
+	no. of root nodes remaining
+		each root node : responsible for a component
+		Basically one group is a componnent under a root node
+
+
+no. of root nodes will never increase
+	Components only get bigger
+
+

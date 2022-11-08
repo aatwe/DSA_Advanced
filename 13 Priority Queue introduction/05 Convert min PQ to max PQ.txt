@@ -1,0 +1,74 @@
+Why convert min PQ to max PQ?
+  standard library gives: only 1 either min or max
+
+
+How to convert min PQ to max PQ?
+Method 1
+	a) invert logic of elements in PQ
+	b) poll using negate logic
+
+For ex
+
+2	7
+  3
+	5
+       13 		11
+
+
+x,y in PQ
+min PQ : parent < child
+
+Wha is PQ variant? if x <= y -> priority of x is higher	//x comes out first
+negation?
+		if x >= y -> priority of y is higher	//y comes out first  //yes weird
+
+When we poll these elements out ? (with negated comparator)
+
+13  11  7  5  3  2
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+Method 2:
+a) negative of all numbers in PQ
+b) poll with normal logic
+c) remove negative sign
+
+-2	-7
+  -3
+	-5
+       -13 		-11
+
+-13  -11  -7  -5  -3  -2
+13  11  7  5  3  2
+++++++++++++++++++++++++++++++++++++++++++++++++
+Method 3 : using string 	//BELOW is basically turning min heap to max heap
+	given: lex() is a comparator for strings
+	          nlex() = negation of lex
+lex comparator
+	lex(s1,s2) = -1 if s1 < s2 lexicographically
+	lex(s1,s2) =  0 if s1 = s2 lexicographically
+	lex(s1,s2) =  1 if s1 > s2 lexicographically
+		
+negation of lex comparator
+	nlex(s1,s2) = -(-1) if s1 < s2 lexicographically
+	nlex(s1,s2) =  0 if s1 = s2 lexicographically
+	nlex(s1,s2) =  - (+1) if s1 > s2 lexicographically
+
+//note: lexico priority
+	1) smaller in char value
+	2) shortest
+or
+	1) largest in char value
+	2) longest
+
+Ex Objective: add all strings on right to PQ
+	How? using lex() comparator
+
+		XX	FZ
+		A     XR   
+			X
+		   B
+lex() Output
+A  B  FZ  X   XR  XX
+
+nlex()
+XX  XR  X  FZ  B  A

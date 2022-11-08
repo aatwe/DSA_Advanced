@@ -1,0 +1,49 @@
+What is minimum spanning tree?
+
+	What is Given? graph with vertices and edges
+
+	What is minimum spanning tree?
+	Subset of edges connecting all vertices at minimal cost
+
+	basically 
+	how to connect all vertices of the graph with minimum no. of edges
+
+
+
+For ex
+Given: 	Vertices
+	Edges
+	All are connected in a config
+		5
+	A     _________	
+		        \		
+ 1      /	       \9		B
+	2	      2 /	     \ 4		
+E           -----	D
+		        	        C		
+    1  \	     5  /       !          \	   4  /     \  8 
+			H       |1  	   J
+		        /	    6 \        / 0   
+	F--------	G      -------     I   
+	    7	             4
+
+
+Objective? find possible minimum spanning tree
+Solution:
+Basically connected all points
+total edge weight = 14 = minimum
+
+Q) Does there exist only 1 min spanning tree? no can be many
+We can have many similar minimum spanning trees
+		
+	A     	
+		     	
+ 1      /	      		B
+	2	      2 /	     \ 4		
+E           -----	D
+		        	        C	      J	
+    1  \	                          \	         \1      / 0
+			H           |    	   
+		        /	    6 \        
+	F	G                      I   
+	    	             

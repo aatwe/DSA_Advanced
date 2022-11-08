@@ -1,0 +1,47 @@
+1) 
+Given 2 objects: x and y
+
+if H(x) = H(y)
+x might be equal to y
+
+
+if H(x) != H(y)
+x definitely != y
+++++++++++++++++++
+How we use this feature?
+
+we can avoid opening files x and y to compare
+no need to compute large values of x and y (for ex in file system )
+if we hash values, can compare and check if H(x) != H(y)
+	however if equal -> have to check byte per byte
+
+Note: Files use cryptographic hash functions and checksums
+++++++++++++++++++++++++++++++++++++++++++++
+2) Hash functions should be deterministic / unwaivering in output
+
+if H(x) = y
+	//H(x) always produces y		//why imp? hash table screws otherwise
+
+
+ex of non determinisitic hash function
+counter := 0
+function H(x):
+     counter = counter + 1
+     return (x + counter) mod 13
+
+when call first time H(5) = 6
+2nd time call	H(5) = 7
+++++++++++++++++++++++++++++++++++++++++++++
+3) Make hash function uniform
+	Why? to minimize hash collisions, make sure all values of hash function are hit
+				//can fill table uniformly 
+		What is hash collision?
+		  2 objects x and y , H(x) = H(y)
+	     How to make uniform?
+
+Name	Age	Sex	Hash
+Will	21	M	5
+Kate	19	F	5
+Bob	33	M	1
+Rose	26	F	0
+		

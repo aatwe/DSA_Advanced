@@ -1,0 +1,46 @@
+What are tree data structure?
+	
+	Undirected() graph	//each edge can be traversed both ways
+What conditions trees must satisfy?
+1) Acyclic Connected graph
+		//connected: all vertices connected to each other by some path
+		disconnected: atleast 2 vertices : not connected by any path
+
+2) Connected graph with N nodes and N-1 edges
+
+
+3) any 2 vertices connected by ONLY 1 path	
+		//if there were, it would create cycle
+
+
+
+We discuss
+	Binary Trees and Binary Search Trees
+
+
+
+Q) What are rooted trees? What is root node
+	top most node of tree //denoted by circle
+	Any node of tree can be rooted
+
+Q) What is a child and parent node? child node extends from parent node
+		(extends = from parent to child)
+
+Q) What is the parent of root node? root node has no parent / itself
+//for file system parent of root node is root node itself
+CLI : pwd
+//how to go up to parent?\
+	cd ../
+//How to go total up?
+	cd /
+
+Q) What is a leaf node? node without any children
+
+Q) What is subtree? tree entirely contained within another
+	denote by triangles
+	//subtree can have single node
+
+
+Q) What are degenerate binary tree?
+	every parent has just 1 child node
+	

@@ -1,0 +1,71 @@
+1) What is complexity analysis?
+	How much time an algo will take to finish
+	How much space alg needs for computation
+
+2) Why compute complexity? for efficiency
+	Algo useless:
+		if takes time = lifetime of universe
+		if it takes space = all files on internet
+
+
+3) What is Big O? 
+	a abstract metric to tell how much time/ how much space algo takes?
+	Big O notation
+
+
+4)  What Big O Calculates/cares for? Worst case input for algo (hardest)
+	for ex a algo : sorting no.s 	
+		input = worst possible arrangement
+	for ex a algo : finding an element
+		input = element at last
+		//time complexity : linear to elements in list
+
+5) Why we ignore constants and multiplicative factors in big o?
+6) What Big O doesnt care for? small input cases
+
+
+7) What is time complexity?
+			//Worst how much time algo will need	 to perform and give output		
+			
+
+
+8) What is space complexity?	
+			//Worst how much space algo will need to perform and give output
+
+
+
+9) What example of Big O Notation?
+Given:  	Algorithm
+	Input size (n)
+	
+
+	Time = function (input size )	
+
+ 	Constant Time 	: O(1)
+	Logarithmic time:   : O(log(n))
+	Linear Time	: O(n)
+	Linearithmic time   : O(nlog(n))
+	Quadratic Time	: O(n^2)
+	Cubic Time	: O(n^3)
+	Expo  Time	: O(b^n)
+	Factorial Time	: O(n!)
+
+10) What is this expression (n^2 or log(n)) in Big O? It is the function : that tells about running time of algorithms
+for ex f(n) = 7log(n)^3 + 15 n^2 + 2n^3 + 8
+
+Summary:
+Big O notation = O(f(n))
+//f(n) tells abo9ut running time of algo
+
+What Big O doesnt care for? small input cases	i.e n (input size is small)
+What does it mean for f(n) if it dont care for small values of n
+	We can ignore constants in  +c and nc
+
+sO(n + c) = O(n)
+O(cn) = O(n), c> 0 
+SUMMARY
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+For ex
+for f(n) =  7log(n)^3 + 15 n^2 + 2n^3 + 8		//f(n) function to represent runtime
+O(f(n)) = O(n^3 )					//O(f(n)) = Big O Complexity
+

@@ -1,0 +1,10 @@
+We had question why union find is so efficient?
+	why amortized constant time?
+Lets dive
+
+Note pre-requisites: How both operators work
+	Find()
+	Union() 
+	
+
+++++++++++++++++++++++++++++++++++++++

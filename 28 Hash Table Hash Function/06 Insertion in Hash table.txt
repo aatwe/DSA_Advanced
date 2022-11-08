@@ -1,0 +1,87 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++
+For ex
+
+Given
+ Hash Function : H(x) = (x^2 + 3 )mod 10
+ Hash table: 		//array
+         Key	        Value
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
++++++++++++++++++++++++++++++++++++++++++++++++++
+Objective: Insert integer-string key value pair in hash table
+	representing user rank - username in online coding competition
+How to access the entries? hash function H(x)
++++++++++++++++++++++++++++++++++++++++++++++++++
+Objective
+Basically : hash takes key input -> it gives us where to put key value pair so other person wont know where key value pair is unless he knows the key
+insert  for ex (3 , "byte-eater") in hash table
+
+	0) Create/Use Hash function H(x)
+A) Insert(3 , "byte-eater")
+		How to insert?
+	1) Hash the key	
+		H(3) = (3^2 + 3)mod10 = 2		
+		 What hash function gives? index : 2
+	2) Update Hash table:
+		with what?  key-value pair  3-  byte-eater : 
+		where? at index 2
+
+ Hash table: 		//array
+	         Key	        Value
+	0
+	1
+	2         3 	      "byte-eater"	
+	3
+	4         
+	5
+	6
+	7
+	8
+	9
+
+B) Insert(1 , "will-fiset")
+		How to insert?
+	1) Hash the Key
+		H(1) = (1^2 + 3 )mod 10 = 4
+		What hash function gives? index : 2
+	5) Update Hash Table
+		with what? key-value pair 1 will-fiset
+		where? at index 1
+	 Hash table: 		//array
+	         Key	        Value
+	0
+	1
+	2         3 	      "byte-eater"	
+	3
+	4         1	      "will-fiset"
+	5
+	6
+	7
+	8
+	9
+	
+	4) 
+.....
+Similarly after inserting key-value pairs
+Hash table: 		//array
+	         Key	        Value
+	0
+	1
+	2         3 	      "byte-eater"	
+	3        10         "orange-knight"
+	4         1	      "will-fiset"
+	5
+	6
+	7        32 	      "Lauren425"
+	8         5         "ternarywizard"
+	9
++++++++++++++++++++++++++++++++++
+How to i=

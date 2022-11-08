@@ -1,0 +1,49 @@
+ What is hash table? One data structure to rule them all
+
+
+data structure
+	helps to map keys to values
+	How to map? hashing
+	
+Key - value : can be any value
+can we map string -> no.? yes
+
+Key must be unique, Key must be hashable
+values dont have to be unique
+
+
+Where is hash table commonly used?
+	Track Item frequencies
+	for ex frequency of words in Hamlet
+	1) 	hamlet		114
+		ghost		33
+		the		1151
+		lord		223
+		a		550
+		cabbage		null
+
+
+How to construct mapping? Using hash function
+
+
+What is hash function?
+Ex1)
+	H(x) 	//what does it do?
+		maps a key to whole number in fixed range
+
+	H(x) = (x^2  -6x + 9) mod 10
+			-> maps integer keys to range [0,9]
+	can see
+	H(4)= H(2)
+
+Ex2)
+H(S)
+Converts string -> number
+function H(S) :
+  sum := 0
+  for char in s:
+       sum=  sum + ASCII(char)
+  return sum mod 50
+
+
+->ex H(BB) = (66 + 66)mod 50 = 32

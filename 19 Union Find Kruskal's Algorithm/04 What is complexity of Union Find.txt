@@ -1,0 +1,23 @@
+Union find has 
+Highly efficient complexity
+
+a) Construction: O(n)
+
+b) Union  :   	             α(n)	//Amortized constant time  complexity
+		  //almost constant time
+
+c) Find 	:   	             α(n)	//
+
+d) Get Component Size :   α(n)
+
+e) Check if connected   :    α(n)
+
+f) Count components   :    O(1)
+	How many
+
+
+However earlier case didnt //not without path compression
+
+Q) How to check if H and B are in same group or different?
+
+	worst case: 5 hops	//Check final map	

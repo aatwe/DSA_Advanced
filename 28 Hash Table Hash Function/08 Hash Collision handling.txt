@@ -1,0 +1,21 @@
+What is hash collision?
+		  2 objects x and y , H(x) = H(y)
+		2 keys having same index		
+		//cant put 2 keys in same index, no space
+For ex H(2)= H(8)
+
+How to handle?
+Hash collision resolution techniques
+
+a) separate chaining
+	What is separate chaining?
+		a) store other key(s) in separate/auxillary data structure (LL usually, can use array/BT/SBT/Hybrid approach in java: once length reached -> switch to binary tree )
+						//What is purpose of this auxillary DS? hold all collisions
+
+
+b) open addressing
+	What is open addressing?
+		a) store other key(s) in same hash table
+		b) 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+

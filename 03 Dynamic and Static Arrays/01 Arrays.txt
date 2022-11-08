@@ -1,0 +1,54 @@
+Q) How to represent index of an array? []
+
+	A[0] = 44;	//44 value of element at position 0 in array A
+	A[1] = 12;
+	A[9] => Out of bound element
+
+Q) How to assign array an element?
+	A[0] := -1; 
+++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) Why array used so much?  data structures building block
+	Can construct any data structure with array and pointer
+
+Q) What is static array?
+	fixed length container
+	n elements
+	all adjacent
+	indexable: 0 to n-1
+		indexable? reference for each element
+	
+	
+Q) Where and when to use static array? 	
+	a) store objects temporarily
+	b) store input/output stream information
+		in a buffer	//reading file in chunks
+
+	c) look up tables : can index
+	d) in programming lang
+		if allowed only to return 1 values -> can return pointer/reference to an array  
+
+	e) Dynamic programming
+		tabulate cache/store already computed subproblems
+	   for ex knapsack problem / coin change problem
+
+
+Q) What is time complexity of static array and dynamic array?
+
+	Static		Dynamic
+Access	O(1)		O(1)	//why 1? arrays are indexable //can directly since we know index
+Search     O(n)		O(n)	//searching a number? linear  worst case last element
+Insert	NA		O(n)	//static: cant grow, so no point to insert	//dynamic: worst case shift all to right , linear
+Append	NA		O(1)	//static: cant grow, so no point to append          // dynamic (using static) resize then append -> constant time
+Delete	NA		O(n)	//cant grow, so no point to delete	'	//similar to insertion, have to shift elements ,and recopy everything
+
+
+Note: Dynamic array isnt strictly defined data structure
+	for ex dynamic array using a linked list	
+	if it keeps pointer to element
+
+Note: Appending is done at the end
+		
+Note: How to access elements in an array? by their index
+					Any other way to access elements? No, 
+					indexing: 0 based
+					 In Computer science : element is positioned at index 0

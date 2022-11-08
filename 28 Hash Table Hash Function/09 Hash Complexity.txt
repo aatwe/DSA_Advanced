@@ -1,0 +1,6 @@
+		Average		Worst
+Insertion:		 O(1)		O(n)		//quick insertion and removal times
+lookup		 O(1) 		O(n)
+Removal 		 O(1)		O(n)
+
+Worst TC: Observed when using non uniform hash functions	

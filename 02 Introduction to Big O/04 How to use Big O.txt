@@ -1,0 +1,163 @@
+1) a := 1		//O(1)	//Constant time
+2) b :=2		//O(1)	//Constant time
+3) c := a + 5b	//O(1)	//constant time
+4) i : = 0		//O(1)	//Constant time // not dependent on n 
+			What is f(n) = 1
+	while i < 11	//not dependent
+	Do
+	  i = i +1;		//not dependent
+
+
+5) i := 0
+	while i < n	//dependent
+	Do i = i+1;	//how run time related? //What is f(n) = n
+			//What is BigO? 
+				O(f(n)) = O(n)
+	 
+
+	
+6) i := 0
+	while i < n		
+	Do i = i+3;	//how run time related? What is f(n) = n/3	loop finishes thrice faster
+			//What is Big O? 
+				O(f(n)) =O(n)
+
+
+
+7) Quadratic Time complexity
+a) Algo 1	//Think in terms of : what we want to know? How much work done for i = n	or //worst case   // or How many iterations before algo is complete 	
+	What is time complexity for below? O(n^2)
+		Why O(n^2)
+																		//What we want to know?How many iterations before algo is complete
+for(i:=0; i< n; i = i+1)					// linear (think in terms of work , if  i = 0 				if i = 1 , 				..... if i = n
+   for(j :=0; j< n; j= j+1)	//starts at j = 0							work done by algo = n, 			work done by algo  = n		work done by algo  = n^2
+	What is f(n)? f(n) = n*n = n^2				
+	What is O(f(n)) = O(n^2)				
+
+b) Algo 2
+for(i:=0; i< n; i = i+1)					// linear (think in terms of work , if  i = 0 				if i = 1 , 				..... if i = n
+   for(j :=i ; j< n; j= j+1)	//starts at j = i							work done by algo = n, 			work done by algo  = n-1		work done by algo  = n(n-1)/2
+
+	What is f(n)? f(n) = n*n = n^2
+	What is O(f(n)) = O(n^2)
+
+	How many iterations before algo is complete?
+
+8) Logarithmic Time Complexity
+	Given array is sorted
+	Find Time complexity of binary search?
+	Binary search : O(log(n))				//Find by dividing arrray in 2 	//discard one half
+	Why?
+
+
+	low = 0;
+	high = n -1
+	while low <= high
+	   Do
+	      mid := (low + high) /2
+	      If array[mid] == value : return mid;
+	      Else If array[mid] < value: lo = mid + 1;	//shift low, reduce search area to right half
+	      Else If array[mid] > value: lo = mid - 1;	//shift low, reduce search area to left half
+	return -1;					
+
+	Q1) How many iterations before algo is complete? 	
+	After maths,
+		-> O(log2(n)) = O(log(n))		//imples? binary search takes lgoarithmic run time wrt to input size n
+
+
+
+9) //Note always check for indentations
+
+	i:= 0
+	While i< n Do
+	    j= 0
+	    While j < 3*n Do
+	         j = j +1;
+	    j = 0;
+	   While j< 2*n Do
+	         j = j + 2;
+	    i = i + 1;
+
+What is f(n)? How many iterations before algo ends?
+	i=0			i = 1		i = 2		i = 3......	i  = n
+	 j = 1,2,3,4,5... 3n
+                 j = 0
+	 j = 2,4,6,8........2n
+	//3n + 2n operations					//n*(3n + 2n) = 5n^2
+	
+	f(n) = n* (3n + 2n) = 5n^2
+	O(f((n)) = O(n^2)
+
+
+10) 	i:= 0
+	While i< 3*n Do
+	    j= 10
+	    While j < 50 Do
+	         j = j +1;
+	    j = 0;
+	   While j< n*n*n Do
+	         j = j + 2;
+	    i = i + 1;
+
+	i=0			i = 1		i = 2		i = 3......	i  = 3n
+	 j = 10,11,12,13,14... 50
+                 j = 0
+	 j = 0,2,4,6........n^3
+	//50 + n^3					//n*(3n + 2n) = 5n^2
+	
+	f(n) = 3n* (40 + n^3) = 120n + 3n^4
+	O(f((n)) = O(n^4)
+
+
+11) How many subsets of a set of n elements?	
+	Ans : total iterations to finish finding subsets of a set / f(n)? 2^n
+		O(2^n)
+
+	Why 2^n ? 2 choices for each element of set (include in subset, not include in subset)
+	2*2*2*2*2....ntimes = 2^n
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	Derivation:
+	2*2*2*2*2....ntimes = 2^n	(2 subsets for 1 element multiplied for each)
+	for ex [2,4] : itereations?4 : null , 2 , 4 , [2,4] 
+	
+	Advance
+		What these subsets actually are?***
+			(dont include2 ,  dont include 4) , (include 2 ,  dont include 4) , (dont include 2, include 4) , (include 2, include 4) 
+	What is a subset? all possible groups formed by including and not including elements of set	
+
+
+	Note: A set  with1 element has 2 subsets   (element and null set) 
+	for ex S = {2} -> subsets are : Null and 2 : 2 subsets
+
+	What is f(n) = how many iterations before algo complete
+
+	
+	
+	What is multiplication actually?
+	for now: just automation of addition
+		and way to visualize groups
+
+	Multiplication helps us in grouping
+	in above 2^2 leads 4
+		it inheritenly means that? 2 states/choices for each element : include or not include
+				2x2x2.....ntimes = total no. of subsets
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+12) All permutations of a string?
+		for n length string
+		1st letter : n choices
+		2nd letter : n-1 choice
+		...nth letter: : 1
+			total choices = n*(n-1)*(n-2)*(n-3)....1 = n!
+
+
+
+13) Sorting using mergesort?
+			O(nlog(n))	//prove later
+
+
+14) Iterate over all cells in matrix of n  by m size
+	how many iterations? n*m
+
+	O(nm)
+

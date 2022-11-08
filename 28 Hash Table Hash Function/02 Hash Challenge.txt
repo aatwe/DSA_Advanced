@@ -1,0 +1,23 @@
+Name	Age	Sex	Hash
+Will	21	M	?
+Kate	19	F	?
+Bob	33	M	?
+Rose	26	F	?
+
+Objective : Find hash function H(person) for above table
+Hash function should map Person to set {0,1,2,3,4,5}
+
+
+function H(person):
+	hash := person.age
+	hash = hash + length(person.name)
+	if person.sex == "M";
+	  hash = hash + 1
+	return hash mod 6
+
+We created hash function logic
+which maps person input to output: {5,5,1,0}
+	in set {0,1,2,3,4,5}
+
+This is arbit created hash functions
+there are proper sophisticated hash functions

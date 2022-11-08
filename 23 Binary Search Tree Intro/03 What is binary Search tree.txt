@@ -1,0 +1,39 @@
+0) tree	//cant contain cycles
+1) binary tree
+2) satisfy BST invariant
+	ALL left SUBTREE elements < ALL right subtree element
+		//ignore when null on other side
+
+Q) Can contain duplicate values? depends on your definition
+
+ImpQ)
+Not a BST
+9 > 8 but in the left sub tree of 8	//should have been in right SUBTREE
+		5
+	          /	       \
+	       4               8
+	    /                /     \
+                  1	   7       10
+	                 /   \
+		6    9
+
+
+For ex
+	2	Yes
+              /	   \
+             1    3
+
+	Yes
+   5
+    |
+   4
+    |
+   3
+
+Q) Can we store letters in BST? Yes , any ordered data can be stored/comparable in BST
+	D
+            /	     \
+           C         Y
+         /          /    \
+        A	   X    Z
+

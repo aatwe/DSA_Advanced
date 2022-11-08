@@ -1,0 +1,408 @@
+1) Create class DoublyLinkedList
+	 What member instance variables?
+	a) size of  linked list
+	b) head Node	//why null?  LL is empty
+	c) Tail node	//why null?  LL is empty
+
+2) A) Create node class
+	what class contains?
+	data
+	prev and next pointer	//why? this is DLL , 1 node has 2 pointers (next pointing forward, prev pointing back)
+       a.1	Constructor for node	//what input? data, prev, next
+				//initializes variables
+       a.2    toString() method
+
+3) clear() method	//O(n)  //why O(n) -> have to traverse all elements
+	//clear list, deallocate all elements 1 by 1
+		how deallocate? set to null
+	//how to clear ?
+	   point trav to first node , delete all data , move trav to next node, keep doing till trav reaches null
+4) size() method
+	returns size of linked list
+5) isEmpty() method
+	checks and returns if size == 0
+
+6) add()	//adds elem of type T to tail O(1) why? we track tail
+
+7) addFirst(T elem)		//add to starting of LL   //also O(1)
+	how to addFirst()?
+	  case 1) if LL is empty -> set head and tail as new node // new node's prev ,next = null
+	  case 2) if LL is not empty -> whatever head pointer was, set head.prev pointer --> new Node	//new node's data = elem,prev = null and next = wherever earlier head was
+				 set the old head to starting node, (what is starting node? new node )make the new node as head 	//head = head.prev	//head.prev was null  
+		increment size of LL
+
+8) addLast(T elem)	//continue from add()
+	What input?  T elem
+
+	How to add to tail?
+	case 1) if LL isempty -> point head and tail to new node
+		how? head = tail = new  Node <T> (elem, null, null)
+	case 2) if LL is not empty -> the tracked tail's next point to new node
+			make the new node or tail's next as the new tail
+		How?
+			tail.next = new Node<T> (elem, tail, null);
+			tail = tail.next;
+	Increment size by 1
+
+
+9) peekFirst()	//shows just the starting element
+	when not allowed to peak? when LL is empty	//how? 	if(isEmpty()) throw new RuntimeException("Empty List");	
+	How to peak?
+		print head node's data 		//How?    return head.data;
+
+
+10) removeFirst()	//removes first element from linked list
+	How to remove first element / head from linked list?
+	case1) if LL is empty , cant remove : throw back error
+	case2) if LL is not empty
+	
+	a) track first element using head, whatever data in head extract it in data element
+	
+	b) second element(head's next) from LL becomes the new head 
+	
+	reduce size by 1
+	if after removing element : list becomes empty -> set tail and head as null
+			           if list is not empty     -> set head's prev as null 	//memory clean up
+	
+	return extracted data;
+
+
+11) removeLast() : Removes last element
+	How to remove last element from linked list?
+	case1) if LL is empty: cannot remove throw exception
+	case2) if LL is not empty
+		track tail Node , extract data from tail
+		set (node before tail)'s next as null
+		set node before tail as the new tail (How? tail = tail.prev)	
+			
+		reduce size
+
+		After removing if LL is empty-> set head as null
+		After removing if LL is not empty
+		   whatever the new tail : set its next as  null	//will clean up
+		return data;	
+
+
+12) Generic method remove(Node <T> node)		//removes arbit node from LL  (O(1)) , why O(1) 	//we know which node to remove , can directly access
+	What input?  node which is to be removed
+
+	case1 : head node asked to be removed : call removeFirst()	
+	case2 : tail node asked to be removed	   : call removeLast()
+	case3 : arbit middle node, how to remove?
+			
+		a)  (node after removal node)'s prev = (node before removal node(node))'s next
+			node.next.prev 	            =	  node.prev
+			node.prev.next	            =  node.next
+
+		b) extract removal node's value
+			T data = node.data;
+		c) removal node's data, next and prev : set to null	
+			node.data = null;		
+			node = node.prev = node.next = null;
+		d) reduce size by 1
+		
+13) removeAt(int index)	//removes node from an index
+
+	case1: if LL is empty: throw exception
+	case2: if LL is not empty
+		How to remove a node from an index i
+		Create a node trav	//	
+		1) traverse the trav
+		a) if index < size/2
+			//search from front, how to search from front? search till? index i not found
+				start trav from head, move trav to trav.next
+				for(i = 0, trav = head; i!= index ; i++)
+				   trav  = trav.next;
+			
+		
+		b) if index > size/2
+			//search from back
+				for(i = 0, trav = head; i!= index ; i++)
+				   trav  = trav.next;
+				start trav from tail
+				for(i = size-1, trav = tail; i!= index ; i--)
+				   trav  = trav.prev
+
+		2) not trav is on ith node //call remove//SINCE INPUT WE HAVE THE NODE NOW
+			return remove(trav);
+			
+
+14) remove(Object obj)	//input? a value in LL is given
+create trav node and point to head	
+	How to remove a value from LL?
+	case1) if object is null	//linked list could contain null value, we will support searching for null also
+	if(obj == null) {
+	     for(trav = head; trav!=null ; trav = trav.next)
+		{
+		if(trav.data ==null){remove(trav)	//call the remove function with trav node input that we have
+		   return true;		
+}
+}
+		
+
+	case2) if object is not null
+	a) create and point a trav node to head
+	b) loop to trav.next until trav!= null;	//LOOP till we find the respective value
+	 check if trav.data value = object input		//how to check? .equals()
+		obj.equals(trav.data)
+	c) after the value found, remove trav node using remove function (input trav node )and return true 
+	`  remove(trav)
+
+	Return false if value not found
+
+Note: 
+.equals vs ==
+//can pass object in .equals()
+	
+15)  public int indexOf(Object obj)	//takes input object obj
+				finds index of object if found
+	How to find index ?
+	a) start from index 0
+	b) create trav node and point to head
+	c) case1: obj is null //can be a null element in linked list
+		loop trav node from head until (what condition) trav!= null
+			how to loop?trav = trav.next
+			and increment index on every iteration : index++
+		return index;
+	   case 2: obj is not null
+		loop trav node from head until (what condition) trav!= null
+			how to loop?trav = trav.next
+			on every iteration increment index: index++
+			if(obj.equals(trav.data))
+				return index	//of that iteration
+
+16) contains : Checks if object is in linkedlist'
+	how to check? Try returning index of the object obj
+			indexOf(obj)
+			if = -1 -> not there
+		return true if not equal to -1
+
+
+17) Iterator for linked list
+	a) node trav pointed as head
+	b) until trav!=null
+		capture data and move trav to next
+	c) didnt check for concurrent modification error
+
+
+18) toString() method
+	//Converts linked list to a string representation?
+	How? use StringBuilder class
+	append node.data to string object while traversing
+
+@Override public String toString(){
+	StringBuilder sb = new StringBuilder();
+	sb.append("[");
+	Node <T> trav = head;	//create trav node point as head
+	while(trav!=null) {
+	  sb.append(trav.data + ",");
+	trav = trav.next;
+}
+	sb.append("]");
+	return sb.toString();
+}
+	
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+1) 
+public class DoublyLinkedList <T> implements Iterable<T> {	//Create a class named DoublyLinkedList
+	private int size = 0;				//size	
+	private Node <T>  head  = null;		//head of type node
+	private Node <T>  tail     = null;		//tail of type node
+}
+
+2)
+private class Node <T>{			//node class
+	T data;				//data for node	//what node contains? data of type t, (2)pointer/reference to another type node : prev and next
+	Node <T> prev,next;		//prev and next pointer
+	public Node(T data, Node<T> prev, Node<T> next){	//param constructor for creating a node
+		this.data = data;	
+		this.prev = prev;
+		this.next = next;
+	}
+@Override publicString toString() {
+	return data.toString();
+}
+}
+
+3) public void clear() {
+  Node <T> trav= head;			// what is Node<t> trav? Create a type node named trav    //where is trav node pointing?head  
+   while(trav!= null) {			//point trav to first node , delete all data , move trav to next node, keep doing till trav reaches null			
+	Node <T> next =trav.next;		// What is Node <T> next? next of type node 	//where pointing? trav.next  //implicitly head.next //2nd node
+	trav.prev = trav.next = null;		// trav.prev -> head.prev and trav.next -> head.next = null	// 
+	trav.data = null;			// trav.data or head.data = null // all 3 members of trav are now null
+	trav = next;			//point trav to next node ...where next? 2nd node
+}
+head = tail = trav = null;			//what after all nodes deleted of linked list? delete head,tail and trav node
+size = 0;					//set size of LL to 0
+}
+
+4) public int size() {
+	return size;
+}
+
+5) public isEmpty() {
+	return size() == 0;
+}
+
+6) public void add(T elem){
+	addLast(elem);
+}
+
+7) public void addFirst(T elem){
+  if(isEmpty()) {
+	head = tail = new Node <T> (elem , null, null)
+} else {
+	head.prev = new Node <T> (elem, null, head)	
+	head = head.prev
+}
+size ++;
+}
+
+8) public void addLast(T elem) {
+	if (isEmpty()){
+head = tail = new  Node <T> (elem, null, null)}
+} else {
+	tail.next = new Node<T> (elem, tail, null);
+			tail = tail.next;
+}
+size++;
+}
+
+
+9)  public T peekFirst() {
+	if(isEmpty()) throw new RuntimeException("Empty List");	
+	return head.data;
+}
+
+10) public removeFirst() {
+	if(isEmpty()) throw new RuntimeException("Empty list");
+
+	T data = head.data;
+	head = head.next;
+	--size;
+
+	if(isEmpty()) tail = null;
+	else head.prev = null;
+		return data;
+}
+
+11) public T removeLast() {
+	if(isEmpty()) throw new RuntimeException("Empty List");
+
+	T data = tail.data;
+	tail = tail.prev
+	--size;
+}
+	 if (isEmpty()) head = null;
+	else tail.next;
+	return data;
+
+12) private T remove(Node<T> node)
+{
+			if(node.prev == null) return removeFirst();
+			if(node.next  == null) return removeLast();
+	
+			node.next.prev 	            =	  node.prev
+			node.prev.next	            =  node.next
+			T data = node.data;
+			node.data = null;		
+			node = node.prev = node.next = null;
+			--size;
+			return data;
+}
+
+13) public T removeAt(int index) {
+	if(index < 0 || index >= size) throw new IllegalArgumentException();
+
+	int i;
+	Node <T> trav;
+	
+	if(index < size/2){
+	for(i = 0, trav = head; i!= index ; i++)
+	   trav  = trav.next;
+	} else
+	for(i = size-1, trav = tail; i!= index ; i--)
+	  trav  = trav.prev
+			
+           return remove(trav);
+}
+
+
+14) public boolean remove(Object obj) {
+	Node <T> trav = head;
+
+	if (obj == null){
+		for(trav = head; trav !=null; trav = trav.next){
+		  if(trav.data == null) {
+			remove(trav);
+			return true;
+}}}}
+	else{
+		for(trav = head; trav !=null; trav = trav.next){
+		  if(object.equals(trav.data)) {
+			remove(trav);
+			return true;
+}
+
+return false;		/if value not found
+
+
+
+15) public int indexOf(Object obj){
+   int index = 0;
+  Node <T> trav = head;
+
+if(obj == null){
+	for(trav = head; trav != null; trav = trav.next, index++)
+	  if(trav.data == null)
+	return index;
+}
+
+else{
+	for(trav = head; trav != null; trav = trav.next, index++)
+	if(obj.equals(trav.data))	
+	  return index;
+
+return -1;
+}
+}
+
+
+16) public boolean contains (Object obj) {
+	return indexOf(obj) != -1;
+}
+
+
+//Note: What is @Override?
+	Annotation
+	child class method is supposed to overwrite base class method
+
+@Override public java.util.Iterator<T> iterator() {	//Iterator enables to cycle through  Collection
+   return new java.util.Iterator <T>() {
+	private Node<T> trav = head;
+	@Override public boolean hasNext() {
+	  return trav !=null;
+}
+	@Override public T next() {
+	  T data = trav.data;	
+	  trav = trav.next;
+	   return data;
+}
+}
+}
+
+
+@Override public String toString(){
+	StringBuilder sb = new StringBuilder();
+	sb.append("[");
+	Node <T> trav = head;	//create trav node point as head
+	while(trav!=null) {
+	  sb.append(trav.data + ",");
+	trav = trav.next;
+}
+	sb.append("]");
+	return sb.toString();
+}
+	

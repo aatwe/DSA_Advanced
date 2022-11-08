@@ -1,0 +1,28 @@
+Q) What is a stack?
+Elements add / remove from top	//we only have access to top of stack
+how to track top? top pointer
+
+Q) 
+linear data structure like linked list
+just models real world stack (top access)
+
+Q)
+How to add/delete data on stack?LIFO 
+(add/remove from top)
+ has 2 operations:  push and pop
+
+
+Q) Where is stack used?
+a) Text editors unde mechanism
+b) compiler uses to match syntax
+c) model pile of books and plates
+d) support recursion, how? ) keep track of previous function call 
+	when function return -> pop current frame from stack
+		next function onstack
+e) game like tower of hanoi
+f) Depth first search on graph
+	how to do DFS? 
+	  1) manually , maintain your own stack
+	  2) Recursion
+
+	

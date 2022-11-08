@@ -1,0 +1,3 @@
+What is binary tree?
+	each node: has MAX 2 child nodes
+		          MIN 0

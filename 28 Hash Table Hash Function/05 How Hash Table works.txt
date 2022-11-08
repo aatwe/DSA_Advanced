@@ -1,0 +1,14 @@
+Basically : hash takes key input -> it gives us where to put key value pair so other person wont know where key value pair is unless he knows the key
+
+What complexity of hash function?
+
+//given: uniform hash function
+if we use Hash function  to index into hash table
+	What hash function gives? index
+	lookup this index in table	
+	What is hashtable? fancy array
+
+Insertion:		 O(1)	//quick insertion and removal times
+lookup		 O(1) 
+Removal 		 O(1)	
+

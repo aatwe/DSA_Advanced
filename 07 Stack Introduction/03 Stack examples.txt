@@ -1,0 +1,53 @@
+1)  Parenthesis /bracket match
+What given?
+	String : (){}[]
+	How to check if brackets match?
+	
+for ex
+	case1: [{}] : brackets match
+	case2: {]	 : brackets do not match
+
+Solution? How to check if brackets match?
+What logic?
+open bracket must be closed with same type of closing bracket
+open bracket must be closed in order
+	for ex if open 1 , open 2
+		->close 2  , close 1
+		//cannot close 1 , close 2
+
+
+
+How to match? push "left "on stack and pop only if "right" match with top
+A) if see  left bracket push on stack
+b) if see right bracket 
+	check if stack is empty, if stack empty -> not balanced
+			     if stack is not empty check if top element is = reverse of it
+
+
+a) create stack s
+b) loop on bracket string for elements
+	//find reverse bracket for any bracket using a function
+	rev = getReversedBracket(bracket)
+
+	If left bracket in string encountered
+	 push bracket onf stack s
+
+	else if 
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+2) Tower of Hanoi
+
+Objective: move disks to pile 3
+	restriction: cannot place large on top of small disk
+Disk pile 1 : Arranged large first small last (1234)
+Disk Pile 2
+Disk Pile 3
+start state(1,2,3,4)----> develop (3,4) ---> dev (3,4) and (1,2)					dev (2,3) ----------> 	(dev 1,2,3)  ---------->						dev(1,2,3,4)
+(1,2,3,4,) , () , () --->(3,4) ,(1) , (2) -------->  (3,4) ,(),  (1,2)  --------> (4) , (3) , (1,2)----> (1,4) , (3) , (2) ------->  (1,4) , (2,3) , () --------> (4) , (1,2,3) , () ------->() , (2,3) , (1,4) ----> (2) , (3) , (1,4) ------> (1,2) ,() ,(3,4) ---->() , () , (1,2,3,4)
+		(123)	         (1234)
+
+since rule is we can only access from top
+final state:  get biggest at bottom
+a) move smallest pile 1 to pile 2
+b) move second smallest pile 1 to pile 3
+c) 
+	

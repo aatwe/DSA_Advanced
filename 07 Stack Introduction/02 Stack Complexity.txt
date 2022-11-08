@@ -1,0 +1,13 @@
+1) Pushing : O(1) , why? only one place to push
+
+
+2) Popping : O(1) , why? only one place to push
+
+
+3) Peeking : O(1) , why? only one place to push
+
+
+4) Searching : O(n) why linear? element can be at bottom of list
+
+
+5) Size()  : O(1)

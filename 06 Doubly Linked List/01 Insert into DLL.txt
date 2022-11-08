@@ -1,0 +1,16 @@
+How many pointers? 	//Note: DLL has pointers to next and previous node
+Head : where pointing to? starting node
+Tail : where pointing to? last node
+trav : start from head node
+
+
+algo?
+1) seek trav pointer until node 1 before insertion position node found
+2) create new node (to be added)
+3) new node -> forward pointer points to insertion position node 
+	        new node backward pointer points to trav node pointer(1 before the insertion position)
+
+4) backward pointer of insertion place node point to new node
+5) forward pointer of trav node  -> point to new node
+
+Element inserted in
